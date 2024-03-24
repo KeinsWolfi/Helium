@@ -1,0 +1,6 @@
+# Project exclude paths
+/target/
+/.idea/
+/test_run/
+/src/main/resources/
+/test_natives/

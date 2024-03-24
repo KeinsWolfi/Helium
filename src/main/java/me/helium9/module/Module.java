@@ -1,0 +1,104 @@
+package me.helium9.module;
+
+import lombok.Getter;
+import lombok.Setter;
+import me.helium9.HeliumMain;
+import me.helium9.module.impl.misc.GUISounds;
+import me.helium9.settings.Setting;
+import me.helium9.util.ChatUtil;
+import me.zero.alpine.listener.Subscriber;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SoundCategory;
+import net.minecraft.client.audio.SoundList;
+import org.apache.commons.lang3.Validate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+@Getter
+public abstract class Module implements Subscriber {
+    Random rand = new Random();
+
+    private boolean toggled;
+
+    @Setter
+    private String displayName;
+
+    @Setter
+    private boolean sounds;
+
+    public final String name, description, excludeArray;
+    public final Category category;
+
+    private final List<Setting> sList = new ArrayList<>();
+
+
+    @Setter
+    private int key;
+
+    protected final Minecraft mc = HeliumMain.INSTANCE.getMc();
+
+    public Module(){
+        ModuleInfo info = getClass().getAnnotation(ModuleInfo.class);
+        Validate.notNull(info, "CONFUSED ANNOTATION EXCEPTION");
+
+        this.name = info.name();
+        this.description = info.description();
+        this.category = info.category();
+        this.excludeArray = info.excludeArray();
+    }
+
+
+    protected void addSetting(Setting setting){
+        sList.add(setting);
+    }
+
+    protected void addSettings(Setting... settings){
+        sList.addAll(Arrays.asList(settings));
+    }
+
+    public void onEnable(){
+        ChatUtil.addChatMsg(this.name + " §aenabled§r.");
+        if(HeliumMain.INSTANCE.getMm().getModule("GUISounds").isToggled()) mc.thePlayer.playSound("random.click", 1F, 1F);
+        HeliumMain.BUS.subscribe(this);
+    }
+
+    public void onDisable(){
+        ChatUtil.addChatMsg(this.name + " §cdisabled§r.");
+        if(HeliumMain.INSTANCE.getMm().getModule("GUISounds").isToggled()) mc.thePlayer.playSound("random.click", 1F, 0.5F);
+        HeliumMain.BUS.unsubscribe(this);
+    }
+
+    public void onToggle(){
+
+    }
+
+    public void toggle(){
+        onToggle();
+        if(toggled){
+            toggled=false;
+            onDisable();
+        }else {
+            toggled=true;
+            onEnable();
+        }
+    }
+
+    public void setToggled(boolean toggled){
+        onToggle();
+        if(toggled){
+            this.toggled=true;
+            onEnable();
+        }else {
+            this.toggled=false;
+            onDisable();
+        }
+    }
+
+    public String getDisplayName(){
+        return displayName == null ? name : displayName;
+    }
+
+}
