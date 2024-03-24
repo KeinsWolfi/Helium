@@ -7,7 +7,6 @@ import me.helium9.module.ModuleInfo;
 import me.helium9.settings.impl.ModeSetting;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 
 @ModuleInfo(
