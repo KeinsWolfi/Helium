@@ -8,6 +8,7 @@ import me.helium9.module.ModuleInfo;
 import me.helium9.settings.impl.BooleanSetting;
 import me.helium9.settings.impl.DoubleSetting;
 import me.helium9.settings.impl.RGBSetting;
+import me.helium9.util.render.ColorUtil;
 import me.helium9.util.render.RenderUtil;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
@@ -31,8 +32,7 @@ public class WaterMark extends Module {
     private final BooleanSetting ver = new BooleanSetting("Version", true);
     private final BooleanSetting fps = new BooleanSetting("FPS", true);
 
-    private Integer offset = 0;
-
+    private final BooleanSetting rainbow = new BooleanSetting("Rainbow", true);
     private final DoubleSetting x = new DoubleSetting("x", 4, 0, new ScaledResolution(mc).getScaledWidth(), 1);
     private final DoubleSetting y = new DoubleSetting("y", 4, 0, new ScaledResolution(mc).getScaledHeight(), 1);
     private final DoubleSetting scale = new DoubleSetting("scale", 2, 1, 10, 0.1);
@@ -44,6 +44,7 @@ public class WaterMark extends Module {
 
     @Subscribe
     public final Listener<Event2D> on2D = new Listener<>(e -> {
+        float hue = ColorUtil.getHue(5);
         ScaledResolution sr = new ScaledResolution(mc);
         FontRenderer fr = mc.fontRendererObj;
 
@@ -56,12 +57,16 @@ public class WaterMark extends Module {
             finalText += " " + EnumChatFormatting.GRAY + HeliumMain.INSTANCE.getVersion();
         }
         if(fps.isState()){
-            finalText += " " + EnumChatFormatting.GRAY + String.valueOf(Minecraft.getDebugFPS());
+            finalText += " " + EnumChatFormatting.GRAY + Minecraft.getDebugFPS();
         }
 
         GlStateManager.scale(scale.getVal(), scale.getVal(),1);
         RenderUtil.rect(x.getVal()-2, y.getVal()-2, fr.getStringWidth(finalText)+3, fr.FONT_HEIGHT+2, new Color(100, 100, 100 ,200));
-        fr.drawString(finalText, x.getVal(), y.getVal(), new Color(color.getR(), color.getG(), color.getB(), color.getA()).getRGB());
+        if(rainbow.isState()){
+            fr.drawString(finalText, x.getVal(), y.getVal(), new Color(Color.HSBtoRGB(hue, 1, 0.8f)).getRGB());
+        }else {
+            fr.drawString(finalText, x.getVal(), y.getVal(), new Color(color.getR(), color.getG(), color.getB(), color.getA()).getRGB());
+        }
         GlStateManager.scale(1/scale.getVal(), 1/scale.getVal(),1);
     });
 
