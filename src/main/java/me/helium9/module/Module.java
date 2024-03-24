@@ -60,8 +60,8 @@ public abstract class Module implements Subscriber {
 
     public void onEnable(){
         if(HeliumMain.INSTANCE.getMm().getModule(ModuleNotifications.class).isToggled())
-            ChatUtil.addChatMsg(this.name + " §aenabled§r.");
-        if (HeliumMain.INSTANCE.getMm().getModule("GUISounds").isToggled())
+            ChatUtil.addChatMsg(CategoryChatFormatting(this) + this.name + " §aenabled§r.");
+        if (HeliumMain.INSTANCE.getMm().getModule(GUISounds.class).isToggled())
             mc.thePlayer.playSound("random.click", 1F, 1F);
 
         HeliumMain.BUS.subscribe(this);
@@ -69,7 +69,7 @@ public abstract class Module implements Subscriber {
 
     public void onDisable(){
         if(HeliumMain.INSTANCE.getMm().getModule(ModuleNotifications.class).isToggled())
-            ChatUtil.addChatMsg(this.name + " §cdisabled§r.");
+            ChatUtil.addChatMsg(CategoryChatFormatting(this) + this.name + " §cdisabled§r.");
         if (HeliumMain.INSTANCE.getMm().getModule(GUISounds.class).isToggled())
             mc.thePlayer.playSound("random.click", 1F, 0.5F);
         HeliumMain.BUS.unsubscribe(this);
@@ -103,6 +103,17 @@ public abstract class Module implements Subscriber {
 
     public String getDisplayName(){
         return displayName == null ? name : displayName;
+    }
+
+    public final String CategoryChatFormatting(Module m){
+        String colorChar;
+        colorChar = "§e";
+        if(m.category.equals(Category.Combat)){
+            colorChar="§c";
+        } else if (m.category.equals(Category.Visual)) {
+            colorChar="§b";
+        }
+        return colorChar;
     }
 
 }

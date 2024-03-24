@@ -9,6 +9,7 @@ import me.helium9.settings.impl.ModeSetting;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.util.EnumChatFormatting;
 
 @ModuleInfo(
         name = "Fly",
@@ -41,6 +42,7 @@ public class Fly extends Module {
 
     @Subscribe
     public final Listener<EventUpdate> onUpdate = new Listener<>(e -> {
+        this.setDisplayName(this.name + EnumChatFormatting.GRAY + " " + mode.getCurrentMode());
         EntityPlayerSP player = mc.thePlayer;
         switch (mode.getCurrentMode()){
             case "Vanilla":
