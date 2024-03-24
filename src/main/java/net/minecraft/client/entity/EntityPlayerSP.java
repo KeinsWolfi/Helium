@@ -3,6 +3,7 @@ package net.minecraft.client.entity;
 import me.helium9.HeliumMain;
 import me.helium9.command.CommandManager;
 import me.helium9.event.impl.update.EventUpdate;
+import me.zero.alpine.event.EventPhase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -172,9 +173,6 @@ public class EntityPlayerSP extends AbstractClientPlayer
     {
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ)))
         {
-            //edited client event
-            HeliumMain.BUS.post(new EventUpdate());
-
             super.onUpdate();
 
             if (this.isRiding())
@@ -194,6 +192,11 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onUpdateWalkingPlayer()
     {
+
+        EventUpdate event = new EventUpdate();
+        event.setEventPhase(EventPhase.PRE);
+        HeliumMain.BUS.post(event);
+
         boolean flag = this.isSprinting();
 
         if (flag != this.serverSprintState)
