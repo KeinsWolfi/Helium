@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import me.helium9.HeliumMain;
 import me.helium9.module.impl.misc.GUISounds;
+import me.helium9.module.impl.misc.ModuleNotifications;
 import me.helium9.settings.Setting;
 import me.helium9.util.ChatUtil;
 import me.zero.alpine.listener.Subscriber;
@@ -60,14 +61,19 @@ public abstract class Module implements Subscriber {
     }
 
     public void onEnable(){
-        ChatUtil.addChatMsg(this.name + " §aenabled§r.");
-        if(HeliumMain.INSTANCE.getMm().getModule("GUISounds").isToggled()) mc.thePlayer.playSound("random.click", 1F, 1F);
+        if(HeliumMain.INSTANCE.getMm().getModule(ModuleNotifications.class).isToggled())
+            ChatUtil.addChatMsg(this.name + " §aenabled§r.");
+        if (HeliumMain.INSTANCE.getMm().getModule("GUISounds").isToggled())
+            mc.thePlayer.playSound("random.click", 1F, 1F);
+
         HeliumMain.BUS.subscribe(this);
     }
 
     public void onDisable(){
-        ChatUtil.addChatMsg(this.name + " §cdisabled§r.");
-        if(HeliumMain.INSTANCE.getMm().getModule("GUISounds").isToggled()) mc.thePlayer.playSound("random.click", 1F, 0.5F);
+        if(HeliumMain.INSTANCE.getMm().getModule(ModuleNotifications.class).isToggled())
+            ChatUtil.addChatMsg(this.name + " §cdisabled§r.");
+        if (HeliumMain.INSTANCE.getMm().getModule(GUISounds.class).isToggled())
+            mc.thePlayer.playSound("random.click", 1F, 0.5F);
         HeliumMain.BUS.unsubscribe(this);
     }
 
