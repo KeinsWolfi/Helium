@@ -12,10 +12,14 @@ import net.minecraft.client.gui.FontRenderer;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Frame {
     private final List<ModuleButtons> moduleButtons;
+    private final List<Module> modules;
+
+    private final Minecraft mc = HeliumMain.INSTANCE.getMc();
 
     public Category cat;
     public int offset;
@@ -31,10 +35,16 @@ public class Frame {
         this.width = width;
         this.height = height;
 
+        modules = new ArrayList<>();
+
+        modules.addAll(Arrays.asList(HeliumMain.INSTANCE.getMm().getModulesByCat(cat)));
+
+        modules.sort((m1, m2) -> mc.fontRendererObj.getStringWidth(m1.getDisplayName()) - mc.fontRendererObj.getStringWidth(m2.getDisplayName()));
+
         moduleButtons = new ArrayList<>();
 
         int offset = height+1;
-        for(Module mod : HeliumMain.INSTANCE.getMm().getModulesByCat(cat)){
+        for(Module mod : modules){
             moduleButtons.add(new ModuleButtons(mod, this, offset));
             offset+=height+1;
         }
