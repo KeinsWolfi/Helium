@@ -4,7 +4,6 @@ import me.helium9.HeliumMain;
 import me.helium9.module.Category;
 import me.helium9.module.Module;
 import me.helium9.module.ModuleInfo;
-import net.minecraft.client.Minecraft;
 
 @ModuleInfo(
         name = "Panic",

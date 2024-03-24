@@ -9,8 +9,6 @@ import me.helium9.settings.Setting;
 import me.helium9.util.ChatUtil;
 import me.zero.alpine.listener.Subscriber;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SoundCategory;
-import net.minecraft.client.audio.SoundList;
 import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
