@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.helium9.command.CommandManager;
 import me.helium9.event.impl.input.EventKey;
 import me.helium9.module.ModuleManager;
+import me.helium9.screens.altmgr.AltManager;
 import me.helium9.screens.dropdown.DropDownGui;
 import me.helium9.settings.SettingManager;
 import me.zero.alpine.bus.EventBus;
@@ -38,6 +39,8 @@ public enum HeliumMain implements Subscriber {
     private CommandManager cm;
     private SettingManager sm;
 
+    private AltManager am;
+
     public final void init(){
         BUS.subscribe(this);
         Display.setTitle(name + "  |  " + version);
@@ -47,6 +50,8 @@ public enum HeliumMain implements Subscriber {
         sm= new SettingManager();
 
         gui = new DropDownGui();
+
+        am = new AltManager();
     }
 
     public final void shutdown(){

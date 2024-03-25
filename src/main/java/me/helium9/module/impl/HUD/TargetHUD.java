@@ -36,12 +36,12 @@ public class TargetHUD extends Module {
         float hue = ColorUtil.getHue(5);
         GlStateManager.scale(2, 2, 1);
         ScaledResolution sr = new ScaledResolution(mc);
-        //GlStateManager.scale(2, 2,1);
         if(target != null && target.getDistanceSqToEntity(mc.thePlayer) < 49 && !target.isDead) {
             String targetName = String.valueOf(target.getDisplayName().getUnformattedText());
             switch (colorMode.getCurrentMode()){
                 case "Rainbow":
-                    RenderUtil.rect((sr.getScaledWidth() / 4f) - (fr.getStringWidth(targetName) / 2f) -3, (sr.getScaledHeight()-103)/2f - (fr.FONT_HEIGHT/2f), fr.getStringWidth(targetName)+6, fr.FONT_HEIGHT+3, new Color(Color.HSBtoRGB(hue, 0.5f, 0.5f)));
+                    RenderUtil.outlineRect((sr.getScaledWidth() / 4f) - (fr.getStringWidth(targetName) / 2f) -3, (sr.getScaledHeight()-103)/2f - (fr.FONT_HEIGHT/2f), fr.getStringWidth(targetName)+6, fr.FONT_HEIGHT+2, 1, Color.DARK_GRAY);
+                    RenderUtil.rect((sr.getScaledWidth() / 4f) - (fr.getStringWidth(targetName) / 2f) -3, (sr.getScaledHeight()-103)/2f - (fr.FONT_HEIGHT/2f), fr.getStringWidth(targetName)+6, fr.FONT_HEIGHT+2, new Color(Color.HSBtoRGB(hue, 0.5f, 0.6f)));
                     break;
                 case "Health":
                     Color healthColor;

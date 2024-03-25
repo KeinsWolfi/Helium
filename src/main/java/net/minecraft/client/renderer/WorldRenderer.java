@@ -1043,6 +1043,12 @@ public class WorldRenderer
         return this.needsUpdate;
     }
 
+    public void begin(int i, VertexFormat vertexFormat) {
+    }
+
+    public void pos(int par1, int par4, double v) {
+    }
+
     public class State
     {
         private final int[] stateRawBuffer;
