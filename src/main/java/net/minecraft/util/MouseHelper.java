@@ -35,4 +35,12 @@ public class MouseHelper
         this.deltaX = Mouse.getDX();
         this.deltaY = Mouse.getDY();
     }
+
+    public void centerMouse() {
+        Mouse.setCursorPosition(Display.getWidth()/2, Display.getHeight()/2);
+    }
+
+    public void mouseGrab(boolean b) {
+        Mouse.setGrabbed(b);
+    }
 }

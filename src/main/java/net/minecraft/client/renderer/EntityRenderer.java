@@ -13,6 +13,8 @@ import java.util.concurrent.Callable;
 
 import me.helium9.HeliumMain;
 import me.helium9.event.impl.render.Event3D;
+import me.helium9.event.impl.render.EventCamera;
+import me.zero.alpine.event.EventPhase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.material.Material;
@@ -721,6 +723,9 @@ public class EntityRenderer implements IResourceManagerReloadListener
      */
     private void orientCamera(float partialTicks)
     {
+        EventCamera event = new EventCamera(partialTicks);
+        event.setEventPhase(EventPhase.PRE);
+        HeliumMain.BUS.post(event);
         Entity entity = this.mc.getRenderViewEntity();
         float f = entity.getEyeHeight();
         double d0 = entity.prevPosX + (entity.posX - entity.prevPosX) * (double)partialTicks;
@@ -857,6 +862,8 @@ public class EntityRenderer implements IResourceManagerReloadListener
         d1 = entity.prevPosY + (entity.posY - entity.prevPosY) * (double)partialTicks + (double)f;
         d2 = entity.prevPosZ + (entity.posZ - entity.prevPosZ) * (double)partialTicks;
         this.cloudFog = this.mc.renderGlobal.hasCloudFog(d0, d1, d2, partialTicks);
+        event.setEventPhase(EventPhase.POST);
+        HeliumMain.BUS.post(event);
     }
 
     /**

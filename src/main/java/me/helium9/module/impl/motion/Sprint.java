@@ -1,5 +1,6 @@
 package me.helium9.module.impl.motion;
 
+import me.helium9.event.impl.render.EventCamera;
 import me.helium9.event.impl.update.EventUpdate;
 import me.helium9.module.Category;
 import me.helium9.module.Module;
@@ -20,7 +21,7 @@ import org.lwjgl.input.Keyboard;
 )
 public final class Sprint extends Module {
 
-    private final ModeSetting mode = new ModeSetting("Mode", "Vanilla");
+    private final ModeSetting mode = new ModeSetting("Mode", "Vanilla", "Omni");
 
     public Sprint(){
         addSettings(mode);
@@ -42,6 +43,8 @@ public final class Sprint extends Module {
         switch (mode.getCurrentMode()){
             case "Vanilla":
                 mc.gameSettings.keyBindSprint.setPressed(true);
+                break;
+            case "Omni":
                 break;
         }
     });

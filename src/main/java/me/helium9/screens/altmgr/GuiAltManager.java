@@ -107,8 +107,8 @@ public class GuiAltManager
         AltManager altManager2 = HeliumMain.INSTANCE.getAm();
         for (Alt alt2 : AltManager.registry) {
             if (!this.isAltInArea(y2)) continue;
-            String name = alt2.getMask().equals("") ? alt2.getUsername() : alt2.getMask();
-            String pass = alt2.getPassword().equals("") ? "\u00a7cCracked" : alt2.getPassword().replaceAll(".", "*");
+            String name = alt2.getMask().isEmpty() ? alt2.getUsername() : alt2.getMask();
+            String pass = alt2.getPassword().isEmpty() ? "§cCracked" : alt2.getPassword().replaceAll(".", "*");
             if (alt2 == this.selectedAlt) {
                 if (this.isMouseOverAlt(par1, par2, y2 - this.offset) && Mouse.isButtonDown(0)) {
                     Gui.drawRect(52.0f, y2 - this.offset - 4, width - 52, y2 - this.offset + 20, -2142943931);
