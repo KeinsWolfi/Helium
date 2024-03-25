@@ -1,5 +1,7 @@
 package me.helium9.module.impl.combat;
 
+import me.helium9.HeliumMain;
+import me.helium9.event.impl.update.EventAttack;
 import me.helium9.event.impl.update.EventUpdate;
 import me.helium9.module.Category;
 import me.helium9.module.Module;
@@ -94,6 +96,8 @@ public class KillAura extends Module {
                         mc.thePlayer.swingItem();
 
                         if(target.getDistanceToEntity(mc.thePlayer) < 6) {
+                            EventAttack eventAttack = new EventAttack((EntityLivingBase) target);
+                            HeliumMain.BUS.post(eventAttack);
                             mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(target, C02PacketUseEntity.Action.ATTACK));
                         }
                     }
@@ -112,6 +116,8 @@ public class KillAura extends Module {
                     if(timer.hasTimeElapsed(100, true)) {
                         mc.thePlayer.swingItem();
                         if(target.getDistanceToEntity(mc.thePlayer) < 6) {
+                            EventAttack eventAttack = new EventAttack((EntityLivingBase) target);
+                            HeliumMain.BUS.post(eventAttack);
                             mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(target, C02PacketUseEntity.Action.ATTACK));
                         }
                     }

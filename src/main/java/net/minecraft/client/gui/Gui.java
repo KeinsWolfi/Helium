@@ -250,4 +250,17 @@ public class Gui
         worldrenderer.func_181662_b((double)x, (double)y, 0.0D).func_181673_a((double)(u * f), (double)(v * f1)).func_181675_d();
         tessellator.draw();
     }
+    public static void drawScaledCustomSizeModalRect(float x, float y, float u, float v, int uWidth, int vHeight, float width, float height, float tileWidth, float tileHeight)
+    {
+        float f = 1.0F / tileWidth;
+        float f1 = 1.0F / tileHeight;
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        worldrenderer.func_181668_a(7, DefaultVertexFormats.field_181707_g);
+        worldrenderer.func_181662_b((double)x, (double)(y + height), 0.0D).func_181673_a((double)(u * f), (double)((v + (float)vHeight) * f1)).func_181675_d();
+        worldrenderer.func_181662_b((double)(x + width), (double)(y + height), 0.0D).func_181673_a((double)((u + (float)uWidth) * f), (double)((v + (float)vHeight) * f1)).func_181675_d();
+        worldrenderer.func_181662_b((double)(x + width), (double)y, 0.0D).func_181673_a((double)((u + (float)uWidth) * f), (double)(v * f1)).func_181675_d();
+        worldrenderer.func_181662_b((double)x, (double)y, 0.0D).func_181673_a((double)(u * f), (double)(v * f1)).func_181675_d();
+        tessellator.draw();
+    }
 }

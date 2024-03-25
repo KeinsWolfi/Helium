@@ -68,6 +68,7 @@ public class WaterMark extends Module {
             fr.drawString(finalText, x.getVal(), y.getVal(), new Color(color.getR(), color.getG(), color.getB(), color.getA()).getRGB());
         }
         GlStateManager.scale(1/scale.getVal(), 1/scale.getVal(),1);
+
     });
 
 }

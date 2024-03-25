@@ -1,5 +1,7 @@
 package net.minecraft.client.multiplayer;
 
+import me.helium9.HeliumMain;
+import me.helium9.event.impl.update.EventAttack;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -8,6 +10,7 @@ import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -496,12 +499,19 @@ public class PlayerControllerMP
      */
     public void attackEntity(EntityPlayer playerIn, Entity targetEntity)
     {
-        this.syncCurrentPlayItem();
-        this.netClientHandler.addToSendQueue(new C02PacketUseEntity(targetEntity, C02PacketUseEntity.Action.ATTACK));
+        boolean cancelled = false;
+        if(targetEntity instanceof EntityLivingBase){
+            final EventAttack event = new EventAttack((EntityLivingBase) targetEntity);
+            HeliumMain.BUS.post(event);
+            cancelled = event.isCancelled();
+        }
+        if(!cancelled) {
+            this.syncCurrentPlayItem();
+            this.netClientHandler.addToSendQueue(new C02PacketUseEntity(targetEntity, C02PacketUseEntity.Action.ATTACK));
 
-        if (this.currentGameType != WorldSettings.GameType.SPECTATOR)
-        {
-            playerIn.attackTargetEntityWithCurrentItem(targetEntity);
+            if (this.currentGameType != WorldSettings.GameType.SPECTATOR) {
+                playerIn.attackTargetEntityWithCurrentItem(targetEntity);
+            }
         }
     }
 

@@ -9,6 +9,7 @@ import me.helium9.settings.Setting;
 import me.helium9.util.ChatUtil;
 import me.zero.alpine.listener.Subscriber;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public abstract class Module implements Subscriber {
     private int key;
 
     protected final Minecraft mc = HeliumMain.INSTANCE.getMc();
+    protected final FontRenderer fr = mc.fontRendererObj;
 
     public Module(){
         ModuleInfo info = getClass().getAnnotation(ModuleInfo.class);
