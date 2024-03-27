@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 public class BoxESPUtil {
     public static void RenderEntityBox(Entity entity, double r, double g, double b, double a){
-
+        RenderBox(entity.posX - entity.width / 2, entity.posY, entity.posZ - entity.width / 2, entity.width, entity.height, r, g, b, a);
     }
     public static void RenderBox(double x, double y, double z, double width, double height, double r, double g, double b, double a){
 

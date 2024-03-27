@@ -38,6 +38,7 @@ import javax.imageio.ImageIO;
 
 import me.helium9.HeliumMain;
 import me.helium9.event.impl.input.EventKey;
+import me.helium9.event.impl.input.EventMouse;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -1482,6 +1483,11 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
     private void sendClickBlockToController(boolean leftClick)
     {
+
+        EventMouse event = new EventMouse();
+        HeliumMain.BUS.post(event);
+        if(event.isCancelled()) return;
+
         if (!leftClick)
         {
             this.leftClickCounter = 0;
@@ -1508,6 +1514,11 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
     private void clickMouse()
     {
+
+        EventMouse event = new EventMouse();
+        HeliumMain.BUS.post(event);
+        if(event.isCancelled()) return;
+
         if (this.leftClickCounter <= 0)
         {
             this.thePlayer.swingItem();
@@ -1556,6 +1567,11 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      */
     private void rightClickMouse()
     {
+
+        EventMouse event = new EventMouse();
+        HeliumMain.BUS.post(event);
+        if(event.isCancelled()) return;
+
         if (!this.playerController.func_181040_m())
         {
             this.rightClickDelayTimer = 4;
@@ -2485,6 +2501,11 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      */
     private void middleClickMouse()
     {
+
+        EventMouse event = new EventMouse();
+        HeliumMain.BUS.post(event);
+        if(event.isCancelled()) return;
+
         if (this.objectMouseOver != null)
         {
             boolean flag = this.thePlayer.capabilities.isCreativeMode;
