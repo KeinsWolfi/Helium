@@ -118,8 +118,8 @@ public class KillAura extends Module {
                         if(target.getDistanceToEntity(mc.thePlayer) < 6) {
                             EventAttack eventAttack = new EventAttack((EntityLivingBase) target);
                             HeliumMain.BUS.post(eventAttack);
-                            //mc.playerController.attackEntity(mc.thePlayer, target);
-                            mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(target, C02PacketUseEntity.Action.ATTACK));
+                            mc.playerController.attackEntity(mc.thePlayer, target);
+                            //mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(target, C02PacketUseEntity.Action.ATTACK));
                         }
                     }
             }
