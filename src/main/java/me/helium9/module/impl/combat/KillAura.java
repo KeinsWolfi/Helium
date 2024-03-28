@@ -2,6 +2,7 @@ package me.helium9.module.impl.combat;
 
 import me.helium9.HeliumMain;
 import me.helium9.event.impl.update.EventAttack;
+import me.helium9.event.impl.update.EventMotion;
 import me.helium9.event.impl.update.EventUpdate;
 import me.helium9.module.Category;
 import me.helium9.module.Module;
@@ -70,7 +71,10 @@ public class KillAura extends Module {
     }
 
     @Subscribe
-    private final Listener<EventUpdate> onUpdate = new Listener<>(e ->{
+    private final Listener<EventMotion> onMotion = new Listener<>(e ->{
+
+        if (e.isPost()) return;
+
         this.setDisplayName(name + " " + EnumChatFormatting.GRAY + mode.getCurrentMode() + " " + range.getVal());
 
         List<Entity> targets = (List<Entity>) mc.theWorld.loadedEntityList.stream().filter(EntityLivingBase.class::isInstance).collect(Collectors.toList());

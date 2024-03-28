@@ -2,6 +2,8 @@ package net.minecraft.client.entity;
 
 import me.helium9.HeliumMain;
 import me.helium9.command.CommandManager;
+import me.helium9.event.impl.update.EventMotion;
+import me.helium9.event.impl.update.EventMove;
 import me.helium9.event.impl.update.EventUpdate;
 import me.zero.alpine.event.EventPhase;
 import net.minecraft.client.Minecraft;
@@ -171,6 +173,11 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onUpdate()
     {
+
+        EventUpdate event = new EventUpdate();
+        event.setEventPhase(EventPhase.PRE);
+        HeliumMain.BUS.post(event);
+
         if (this.worldObj.isBlockLoaded(new BlockPos(this.posX, 0.0D, this.posZ)))
         {
             super.onUpdate();
@@ -193,9 +200,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
     public void onUpdateWalkingPlayer()
     {
 
-        EventUpdate event = new EventUpdate();
-        event.setEventPhase(EventPhase.PRE);
-        HeliumMain.BUS.post(event);
+
 
         boolean flag = this.isSprinting();
 
@@ -231,6 +236,13 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
         if (this.isCurrentViewEntity())
         {
+
+            EventMotion event = new EventMotion(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.rotationYaw, this.rotationPitch, this.onGround);
+            event.setEventPhase(EventPhase.PRE);
+            HeliumMain.BUS.post(event);
+
+            if(event.isCancelled()) return;
+
             double d0 = this.posX - this.lastReportedPosX;
             double d1 = this.getEntityBoundingBox().minY - this.lastReportedPosY;
             double d2 = this.posZ - this.lastReportedPosZ;
@@ -279,6 +291,11 @@ public class EntityPlayerSP extends AbstractClientPlayer
                 this.lastReportedYaw = this.rotationYaw;
                 this.lastReportedPitch = this.rotationPitch;
             }
+
+            event.setEventPhase(EventPhase.POST);
+            HeliumMain.BUS.post(event);
+            this.rotationPitchHead = event.getPitch();
+
         }
     }
 
@@ -925,5 +942,16 @@ public class EntityPlayerSP extends AbstractClientPlayer
             this.capabilities.isFlying = false;
             this.sendPlayerAbilities();
         }
+    }
+
+    @Override
+    public void moveEntity(double x, double y, double z) {
+        EventMove event = new EventMove(x, y, z);
+        event.setEventPhase(EventPhase.PRE);
+        HeliumMain.BUS.post(event);
+
+        if(event.isCancelled()) return;
+
+        super.moveEntity(x, y, z);
     }
 }
