@@ -1,35 +1,60 @@
 package me.helium9.util.render.world;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
 import org.lwjgl.opengl.GL11;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class BoxESPUtil {
     public static void RenderEntityBox(Entity entity, double r, double g, double b, double a){
-        RenderBox(entity.posX - entity.width / 2, entity.posY, entity.posZ - entity.width / 2, entity.width, entity.height, r, g, b, a);
+        AxisAlignedBB bb = ESPUtil.getInterpolatedBB(entity);
+        GlStateManager.pushMatrix();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        enableCaps(GL_BLEND, GL_POINT_SMOOTH, GL_POLYGON_SMOOTH, GL_LINE_SMOOTH);
+
+        glDisable(GL_DEPTH_TEST);
+        glDepthMask(false);
+        glLineWidth(3f);
+        glColor4d(r/255, g/255, b/255, (0.3f * a)/255);
+        RenderGlobal.renderCustomBoundingBox(bb, true, true);
+        glDepthMask(true);
+        glEnable(GL_DEPTH_TEST);
+        disableCaps(GL_BLEND, GL_POINT_SMOOTH, GL_POLYGON_SMOOTH, GL_LINE_SMOOTH);
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
     }
     public static void RenderBox(double x, double y, double z, double width, double height, double r, double g, double b, double a){
+        AxisAlignedBB bb = ESPUtil.getInterpolatedBB((float) x, (float) y, (float) z, (float) width, (float) height);
+        GlStateManager.pushMatrix();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        enableCaps(GL_BLEND, GL_POINT_SMOOTH, GL_POLYGON_SMOOTH, GL_LINE_SMOOTH);
 
-        double xF = x- Minecraft.getMinecraft().getRenderManager().viewerPosX;
-        double yF = y- Minecraft.getMinecraft().getRenderManager().viewerPosY;
-        double zF = z- Minecraft.getMinecraft().getRenderManager().viewerPosZ;
+        glDisable(GL_DEPTH_TEST);
+        glDepthMask(false);
+        glLineWidth(3f);
+        glColor4d(r/255, g/255, b/255, (0.2f * a)/255);
+        RenderGlobal.renderCustomBoundingBox(bb, true, true);
+        glDepthMask(true);
+        glEnable(GL_DEPTH_TEST);
+        disableCaps(GL_BLEND, GL_POINT_SMOOTH, GL_POLYGON_SMOOTH, GL_LINE_SMOOTH);
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+        GlStateManager.popMatrix();
+    }
 
-        GL11.glBlendFunc(770, 771);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glLineWidth(2.0F);
-        GL11.glColor4d(r/255, g/255, b/255, a/255);
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
-        GL11.glDepthMask(false);
+    public static void enableCaps(int... caps) {
+        for (int cap : caps) glEnable(cap);
+    }
 
-        RenderGlobal.func_181561_a(new AxisAlignedBB(xF, yF, zF, xF+width, yF+height, zF+width));
-
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glDepthMask(true);
-        GL11.glDisable(GL11.GL_BLEND);
-        GL11.glColor3d(255, 255, 255);
+    public static void disableCaps(int... caps) {
+        for (int cap : caps) glDisable(cap);
     }
 }

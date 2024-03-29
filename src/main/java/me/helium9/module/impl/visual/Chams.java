@@ -4,6 +4,7 @@ import me.helium9.event.impl.render.EventModelRender;
 import me.helium9.module.Category;
 import me.helium9.module.Module;
 import me.helium9.module.ModuleInfo;
+import me.helium9.settings.impl.BooleanSetting;
 import me.helium9.settings.impl.ModeSetting;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
@@ -20,6 +21,8 @@ public class Chams extends Module {
     private int i = 0;
 
     private final ModeSetting mode = new ModeSetting("Mode", "Normal", "Color");
+    private final BooleanSetting players = new BooleanSetting("Players", true);
+    private final BooleanSetting mobs = new BooleanSetting("Mobs", false);
 
     public Chams(){
         addSettings(mode);
@@ -38,11 +41,9 @@ public class Chams extends Module {
                 glColor4f(1f, 1f, 1f, 1f);
             }
 
-            //glDisable(GL_LIGHTING);
-
             glDisable(GL_DEPTH_TEST);
             glDepthMask(false);
-        }else {
+        } else {
             glEnable(GL_DEPTH_TEST);
             glDepthMask(true);
 

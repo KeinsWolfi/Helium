@@ -24,6 +24,8 @@ import net.optifine.util.TextureUtils;
 import org.apache.logging.log4j.LogManager;
 import org.lwjgl.opengl.GL11;
 
+import static net.minecraft.client.renderer.vertex.VertexFormatElement.EnumType.*;
+
 public class WorldRenderer
 {
     private ByteBuffer byteBuffer;
@@ -502,6 +504,10 @@ public class WorldRenderer
     public WorldRenderer func_181666_a(float p_181666_1_, float p_181666_2_, float p_181666_3_, float p_181666_4_)
     {
         return this.func_181669_b((int)(p_181666_1_ * 255.0F), (int)(p_181666_2_ * 255.0F), (int)(p_181666_3_ * 255.0F), (int)(p_181666_4_ * 255.0F));
+    }
+
+    public WorldRenderer color(int colorHex) {
+        return this.func_181669_b(colorHex >> 16 & 255, colorHex >> 8 & 255, colorHex & 255, colorHex >> 24 & 255);
     }
 
     public WorldRenderer func_181669_b(int p_181669_1_, int p_181669_2_, int p_181669_3_, int p_181669_4_)

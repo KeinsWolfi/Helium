@@ -7,12 +7,37 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
+
 public class Gui
 {
     public static final ResourceLocation optionsBackground = new ResourceLocation("textures/gui/options_background.png");
     public static final ResourceLocation statIcons = new ResourceLocation("textures/gui/container/stats_icons.png");
     public static final ResourceLocation icons = new ResourceLocation("textures/gui/icons.png");
     protected float zLevel;
+
+    public static void drawRect2(double x, double y, double width, double height, int color) {
+        GlStateManager.color(1, 1, 1, 1);
+        GlStateManager.enableAlpha();
+        GlStateManager.alphaFunc(GL_GREATER, (float) 0.01);
+        GlStateManager.enableBlend();
+        GlStateManager.blendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.disableTexture2D();
+
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+
+        worldrenderer.begin(GL_QUADS, DefaultVertexFormats.field_181706_f);
+        worldrenderer.func_181662_b(x, y, 0.0D).color(color).func_181675_d();
+        worldrenderer.func_181662_b(x, y + height, 0.0D).color(color).func_181675_d();
+        worldrenderer.func_181662_b(x + width, y + height, 0.0D).color(color).func_181675_d();
+        worldrenderer.func_181662_b(x + width, y, 0.0D).color(color).func_181675_d();
+        tessellator.draw();
+
+        GlStateManager.disableBlend();
+        GlStateManager.enableTexture2D();
+    }
 
     /**
      * Draw a 1 pixel wide horizontal line. Args: x1, x2, y, color

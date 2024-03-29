@@ -1,15 +1,18 @@
 package me.helium9.module.impl.combat;
 
 import me.helium9.HeliumMain;
+import me.helium9.event.impl.render.Event3D;
 import me.helium9.event.impl.update.EventAttack;
 import me.helium9.event.impl.update.EventMotion;
 import me.helium9.event.impl.update.EventUpdate;
 import me.helium9.module.Category;
 import me.helium9.module.Module;
 import me.helium9.module.ModuleInfo;
+import me.helium9.settings.impl.BooleanSetting;
 import me.helium9.settings.impl.DoubleSetting;
 import me.helium9.settings.impl.ModeSetting;
 import me.helium9.util.Timer;
+import me.helium9.util.render.world.BoxESPUtil;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
 import net.minecraft.entity.Entity;
@@ -31,6 +34,10 @@ import java.util.stream.Collectors;
 )
 public class KillAura extends Module {
 
+    private Entity target;
+
+    private List<Entity> targets;
+
     public Timer timer = new Timer();
 
     private final ModeSetting mode = new ModeSetting("Mode", "Single", "Multi","Legit");
@@ -39,8 +46,10 @@ public class KillAura extends Module {
 
     private final DoubleSetting range = new DoubleSetting("Range", 3, 1, 6, 0.1);
 
+    private final BooleanSetting targetEsp = new BooleanSetting("TargetESP", true);
+
     public KillAura(){
-        addSettings(mode, range, sort);
+        addSettings(mode, range, sort, targetEsp);
         setKey(Keyboard.KEY_F);
     }
 
@@ -77,7 +86,7 @@ public class KillAura extends Module {
 
         this.setDisplayName(name + " " + EnumChatFormatting.GRAY + mode.getCurrentMode() + " " + range.getVal());
 
-        List<Entity> targets = (List<Entity>) mc.theWorld.loadedEntityList.stream().filter(EntityLivingBase.class::isInstance).collect(Collectors.toList());
+        targets = (List<Entity>) mc.theWorld.loadedEntityList.stream().filter(EntityLivingBase.class::isInstance).collect(Collectors.toList());
 
         targets = targets.stream().filter(entity -> entity.getDistanceToEntity(mc.thePlayer) < range.getVal() &&  entity != mc.thePlayer).collect(Collectors.toList());
 
@@ -91,7 +100,7 @@ public class KillAura extends Module {
 
 
         if(!targets.isEmpty()) {
-            Entity target = targets.get(0);
+            target = targets.get(0);
             if(target.isDead) return;
             switch (mode.getCurrentMode()){
                 case "Single":
@@ -129,6 +138,17 @@ public class KillAura extends Module {
             }
 
         }
+        else {
+            target = null;
+        }
     });
 
+    @Subscribe
+    public final Listener<Event3D> on3D = new Listener<>(e -> {
+        if(targetEsp.isState()){
+            if(target != null){
+                BoxESPUtil.RenderEntityBox(target, 255, 0, 0, 255);
+            }
+        }
+    });
 }
