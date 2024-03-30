@@ -8,19 +8,21 @@ import me.helium9.settings.impl.DoubleSetting;
 import me.helium9.settings.impl.ModeSetting;
 import me.helium9.settings.impl.RGBSetting;
 import me.helium9.util.ChatUtil;
+import me.helium9.util.render.Animation.Animation;
+import me.helium9.util.render.Animation.Animations.EaseInOutSine;
+import me.helium9.util.render.Animation.Direction;
 import me.helium9.util.render.RenderUtil;
 import me.helium9.util.render.hover.HoverUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.List;
 
 public class ModuleButtons {
+    private final Animation hoverAnimation = new EaseInOutSine(200, 1);
 
     public Module mod;
     public Frame parent;
@@ -36,7 +38,12 @@ public class ModuleButtons {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
 
-        RenderUtil.rect(parent.x,offset+35, parent.width, parent.height, Color.DARK_GRAY);
+        boolean hovered = HoverUtil.isRectHovered(parent.x, offset+35, parent.width, parent.height, mouseX, mouseY);
+
+        hoverAnimation.setDirection(hovered ? Direction.FORWARDS : Direction.BACKWARDS);
+        hoverAnimation.setDuration(hovered ? 400 : 250);
+
+        RenderUtil.rect(parent.x,offset+35, parent.width, parent.height, new Color(Color.HSBtoRGB(0, 0, (0.25f) + Math.min(0.4f, hoverAnimation.getOutput().floatValue()))));
         RenderUtil.rect(parent.x,offset+34, parent.width, 1, Color.LIGHT_GRAY);
 
         if(mod.isToggled()) {

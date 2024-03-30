@@ -18,7 +18,7 @@ public class BooleanSetting extends Setting {
         return state;
     }
 
-    private void toggle(){
+    public void toggle(){
         setState(!isEnabled());
     }
 }

@@ -20,4 +20,20 @@ public class Timer {
         }
         return false;
     }
+
+    public boolean hasTimeElapsed(long time) {
+        return System.currentTimeMillis() - lastMS > time;
+    }
+
+    public boolean hasTimeElapsed(double time) {
+        return hasTimeElapsed((long) time);
+    }
+
+    public long getTime() {
+        return System.currentTimeMillis() - lastMS;
+    }
+
+    public void setTime(long time) {
+        lastMS = time;
+    }
 }
