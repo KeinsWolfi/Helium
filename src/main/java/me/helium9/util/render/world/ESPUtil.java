@@ -47,7 +47,7 @@ public class ESPUtil {
         final double entityRenderWidth = entity.width / 1.5;
         return new AxisAlignedBB(renderingEntityPos[0] - entityRenderWidth,
                 renderingEntityPos[1], renderingEntityPos[2] - entityRenderWidth, renderingEntityPos[0] + entityRenderWidth,
-                renderingEntityPos[1] + entity.height + (entity.isSneaking() ? -0.3 : 0.18), renderingEntityPos[2] + entityRenderWidth).expand(0.15, 0.15, 0.15);
+                renderingEntityPos[1] + entity.height + (entity.isSneaking() ? -0.3 : 0.18), renderingEntityPos[2] + entityRenderWidth);
     }
 
     public static AxisAlignedBB getInterpolatedBB(float x, float y, float z, float width, float height) {
