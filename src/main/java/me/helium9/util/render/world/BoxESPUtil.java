@@ -29,6 +29,7 @@ public class BoxESPUtil {
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
+        glColor4f(1, 1, 1, 1);
     }
     public static void RenderBox(double x, double y, double z, double width, double height, double r, double g, double b, double a){
         AxisAlignedBB bb = ESPUtil.getInterpolatedBB((float) x, (float) y, (float) z, (float) width, (float) height);
@@ -48,6 +49,7 @@ public class BoxESPUtil {
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
+        glColor4f(1, 1, 1, 1);
     }
 
     public static void enableCaps(int... caps) {

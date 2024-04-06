@@ -7,6 +7,7 @@ import me.helium9.module.Module;
 import me.helium9.module.ModuleInfo;
 import me.helium9.settings.impl.BooleanSetting;
 import me.helium9.settings.impl.DoubleSetting;
+import me.helium9.settings.impl.ModeSetting;
 import me.helium9.settings.impl.RGBSetting;
 import me.helium9.util.render.ColorUtil;
 import me.helium9.util.render.RenderUtil;
@@ -28,9 +29,12 @@ import java.awt.*;
 )
 public class WaterMark extends Module {
 
+    private final ModeSetting mode = new ModeSetting("Mode", "Standard", "Simple");
+
     private final BooleanSetting text = new BooleanSetting("Text", true);
     private final BooleanSetting ver = new BooleanSetting("Version", true);
     private final BooleanSetting fps = new BooleanSetting("FPS", true);
+    private final BooleanSetting background = new BooleanSetting("Background", true);
 
     private final BooleanSetting rainbow = new BooleanSetting("Rainbow", true);
     private final DoubleSetting x = new DoubleSetting("x", 4, 0, new ScaledResolution(mc).getScaledWidth(), 1);
@@ -39,11 +43,22 @@ public class WaterMark extends Module {
     private final RGBSetting color = new RGBSetting("Color", 0,0,0,255);
 
     public WaterMark(){
-        addSettings(x,y,scale,color, text, ver, fps);
+        addSettings(mode, text, ver, fps, background, rainbow, x, y, scale, color);
     }
 
     @Subscribe
     public final Listener<Event2D> on2D = new Listener<>(e -> {
+        switch (mode.getCurrentMode()){
+            case "Standard":
+                watermarkStandard();
+                break;
+            case "Simple":
+                watermarkSimple();
+                break;
+        }
+    });
+
+    private void watermarkStandard(){
         float hue = ColorUtil.getHue(5);
         ScaledResolution sr = new ScaledResolution(mc);
         FontRenderer fr = mc.fontRendererObj;
@@ -61,14 +76,38 @@ public class WaterMark extends Module {
         }
 
         GlStateManager.scale(scale.getVal(), scale.getVal(),1);
-        RenderUtil.rect(x.getVal()-2, y.getVal()-2, fr.getStringWidth(finalText)+3, fr.FONT_HEIGHT+2, new Color(100, 100, 100 ,200));
+        if(background.isState())
+            RenderUtil.rect(x.getVal()-2, y.getVal()-2, fr.getStringWidth(finalText)+3, fr.FONT_HEIGHT+2, new Color(100, 100, 100 ,200));
         if(rainbow.isState()){
             fr.drawString(finalText, x.getVal(), y.getVal(), new Color(Color.HSBtoRGB(hue, 1, 0.8f)).getRGB());
         }else {
             fr.drawString(finalText, x.getVal(), y.getVal(), new Color(color.getR(), color.getG(), color.getB(), color.getA()).getRGB());
         }
         GlStateManager.scale(1/scale.getVal(), 1/scale.getVal(),1);
+    }
 
-    });
+    private void watermarkSimple(){
+        float hue = ColorUtil.getHue(5);
+        ScaledResolution sr = new ScaledResolution(mc);
+        FontRenderer fr = mc.fontRendererObj;
+
+        String finalText = "";
+
+        if(text.isState()){
+            finalText += "H" + EnumChatFormatting.GRAY + "elium";
+        }
+        if(ver.isState()){
+            finalText += " " + EnumChatFormatting.GRAY + HeliumMain.INSTANCE.getVersion();
+        }
+        if(fps.isState()){
+            finalText += " " + EnumChatFormatting.GRAY + Minecraft.getDebugFPS();
+        }
+
+        if(rainbow.isState()){
+            fr.drawString(finalText, x.getVal(), y.getVal(), new Color(Color.HSBtoRGB(hue, 1, 0.8f)).getRGB());
+        }else {
+            fr.drawString(finalText, x.getVal(), y.getVal(), new Color(color.getR(), color.getG(), color.getB(), color.getA()).getRGB());
+        }
+    }
 
 }

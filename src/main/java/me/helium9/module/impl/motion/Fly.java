@@ -40,7 +40,8 @@ public class Fly extends Module {
     @Override
     public void onDisable() {
         super.onDisable();
-        mc.thePlayer.capabilities.allowFlying = false;
+        if(!mc.thePlayer.capabilities.isCreativeMode)
+            mc.thePlayer.capabilities.allowFlying = false;
     }
 
     @Subscribe
