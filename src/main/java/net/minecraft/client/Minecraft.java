@@ -36,9 +36,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import javax.imageio.ImageIO;
 
+import lombok.Getter;
+import lombok.Setter;
 import me.helium9.HeliumMain;
 import me.helium9.event.impl.input.EventKey;
 import me.helium9.event.impl.input.EventMouse;
+import me.helium9.module.impl.player.FastPlace;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.audio.MusicTicker;
@@ -287,7 +290,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     /**
      * When you place a block, it's set to 6, decremented once per tick, when it's 0, you can place another block.
      */
-    private int rightClickDelayTimer;
+    @Setter
+    @Getter
+    int rightClickDelayTimer;
     private String serverName;
     private int serverPort;
 
@@ -1512,7 +1517,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         }
     }
 
-    private void clickMouse()
+    public void clickMouse()
     {
 
         EventMouse event = new EventMouse();
@@ -2163,7 +2168,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                 }
             }
 
-            if (this.gameSettings.keyBindUseItem.isKeyDown() && this.rightClickDelayTimer == 0 && !this.thePlayer.isUsingItem())
+            if (this.gameSettings.keyBindUseItem.isKeyDown() && (HeliumMain.INSTANCE.getMm().getModule(FastPlace.class).isToggled() || this.rightClickDelayTimer == 0) && !this.thePlayer.isUsingItem())
             {
                 this.rightClickMouse();
             }
