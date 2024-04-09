@@ -14,7 +14,7 @@ public class BooleanSetting extends Setting {
         this.state = state;
     }
 
-    private boolean isEnabled(){
+    public boolean isEnabled(){
         return state;
     }
 

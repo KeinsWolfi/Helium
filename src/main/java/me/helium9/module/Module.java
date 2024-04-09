@@ -41,6 +41,9 @@ public abstract class Module implements Subscriber {
     protected final Minecraft mc = HeliumMain.INSTANCE.getMc();
     protected final FontRenderer fr = mc.fontRendererObj;
 
+    @Getter
+    private boolean selectingHotkey = false;
+
     public Module(){
         ModuleInfo info = getClass().getAnnotation(ModuleInfo.class);
         Validate.notNull(info, "CONFUSED ANNOTATION EXCEPTION");
@@ -117,5 +120,13 @@ public abstract class Module implements Subscriber {
         }
         return colorChar;
     }
+        // Other methods...
 
+    public void startHotkeySelection() {
+            selectingHotkey = true;
+    }
+
+    public void stopHotkeySelection() {
+            selectingHotkey = false;
+    }
 }

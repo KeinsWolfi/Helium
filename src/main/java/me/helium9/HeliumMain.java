@@ -6,6 +6,7 @@ import me.helium9.event.impl.input.EventKey;
 import me.helium9.module.ModuleManager;
 import me.helium9.screens.altmgr.AltManager;
 import me.helium9.screens.dropdown.DropDownGui;
+import me.helium9.screens.rise.ClickGui.ClickGui;
 import me.helium9.settings.SettingManager;
 import me.zero.alpine.bus.EventBus;
 import me.zero.alpine.bus.EventManager;
@@ -33,7 +34,9 @@ public enum HeliumMain implements Subscriber {
             clientPrefix = "§b[H§3el§1iu§9m]§r ",
             authors = "Helium9";
 
+
     private DropDownGui gui;
+    //private ClickGui gui;
 
     private ModuleManager mm;
     private CommandManager cm;
@@ -50,6 +53,7 @@ public enum HeliumMain implements Subscriber {
         sm= new SettingManager();
 
         gui = new DropDownGui();
+        //gui = new ClickGui();
 
         am = new AltManager();
     }

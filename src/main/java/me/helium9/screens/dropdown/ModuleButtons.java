@@ -1,6 +1,7 @@
 package me.helium9.screens.dropdown;
 
 import me.helium9.HeliumMain;
+import me.helium9.event.impl.input.EventKey;
 import me.helium9.module.Module;
 import me.helium9.settings.Setting;
 import me.helium9.settings.impl.BooleanSetting;
@@ -13,6 +14,9 @@ import me.helium9.util.render.Animation.Animations.EaseInOutSine;
 import me.helium9.util.render.Animation.Direction;
 import me.helium9.util.render.RenderUtil;
 import me.helium9.util.render.hover.HoverUtil;
+import me.zero.alpine.listener.Listener;
+import me.zero.alpine.listener.Subscribe;
+import me.zero.alpine.listener.Subscriber;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.EnumChatFormatting;
@@ -21,18 +25,20 @@ import org.lwjgl.input.Keyboard;
 import java.awt.*;
 import java.io.IOException;
 
-public class ModuleButtons {
+public class ModuleButtons implements Subscriber{
     private final Animation hoverAnimation = new EaseInOutSine(200, 1);
 
     public Module mod;
     public Frame parent;
     public int offset;
 
+    private String keyName;
+
     public ModuleButtons(Module mod, Frame parent, int offset){
         this.mod = mod;
         this.parent = parent;
         this.offset = offset;
-
+        keyName = Keyboard.getKeyName(mod.getKey());
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
@@ -53,7 +59,7 @@ public class ModuleButtons {
         }
 
         if(mod.getKey()!=0) {
-            fr.drawString(Keyboard.getKeyName(mod.getKey()), parent.x + 75, offset + 39, Color.WHITE.getRGB());
+            fr.drawString(keyName, parent.x + 83 - fr.getStringWidth(keyName), offset + 39, Color.WHITE.getRGB());
         }
     }
 
@@ -77,7 +83,38 @@ public class ModuleButtons {
                     ChatUtil.addChatMsg(EnumChatFormatting.GRAY + "  Bool setting. (true/false)");
                 }
             }
+            //not implemented correctly yet
+            //hotkeySelect();
         }
     }
 
+    private void hotkeySelect() {
+        // Start the hotkey selection process
+        mod.startHotkeySelection();
+
+        // Prompt the user to press a key
+        ChatUtil.addChatMsg(EnumChatFormatting.YELLOW + "Press a key to set as the new hotkey for " + mod.getName() + ", or press ESC to cancel.");
+
+        // Listen for a key press event
+        HeliumMain.BUS.subscribe(new Listener<EventKey>(event -> {
+            if (mod.isSelectingHotkey()) {
+                keyName = "...";
+                if (event.getKey() == Keyboard.KEY_ESCAPE) {
+                    // If the ESC key is pressed, cancel the hotkey change
+                    ChatUtil.addChatMsg(EnumChatFormatting.YELLOW + "Hotkey change for " + mod.getName() + " cancelled.");
+                } else {
+                    // If any other key is pressed, update the module's key to the pressed key
+                    mod.setKey(event.getKey());
+                    ChatUtil.addChatMsg(EnumChatFormatting.YELLOW + "New hotkey for " + mod.getName() + " set to " + Keyboard.getKeyName(event.getKey()) + ".");
+                }
+
+                // Stop the hotkey selection process
+                mod.stopHotkeySelection();
+
+                // Unsubscribe this listener after a key is pressed
+                HeliumMain.BUS.unsubscribe(this);
+                keyName = Keyboard.getKeyName(mod.getKey());
+            }
+        }));
+    }
 }
