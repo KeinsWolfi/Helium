@@ -78,8 +78,8 @@ public class TargetHUD extends Module {
                     RenderUtil.rect( (sr.getScaledWidth() / (2f * scale.getVal()) ) - 45, (sr.getScaledHeight() / (1f * scale.getVal()) - 25), 90, 3, Color.LIGHT_GRAY);
                     RenderUtil.rect( (sr.getScaledWidth() / (2f * scale.getVal()) ) - 45, (sr.getScaledHeight() / (1f * scale.getVal()) - 25), 90 * (targetHealth /target.getMaxHealth()), 3, healthColor);
                     fr.drawStringWithShadow(String.format("%.2f", targetHealth) + EnumChatFormatting.WHITE + " / " + target.getMaxHealth(), (float) (sr.getScaledWidth() / (2f * scale.getVal()) ) - 25, (float) (sr.getScaledHeight() / (1f * scale.getVal()) - 65), healthColor.getRGB());
-                    RoundedUtil.drawRoundedRect((float) ((sr.getScaledWidth() / (2f * scale.getVal()) ) - 27), (float) (sr.getScaledHeight() / (1f * scale.getVal()) - 54), (float) ((sr.getScaledWidth() / (2f * scale.getVal()) ) - 27) + 75, (float) (sr.getScaledHeight() / (1f * scale.getVal()) - 54) + 15, 5, Color.LIGHT_GRAY.getRGB());
-                    RoundedUtil.drawRoundedOutline((float) ((sr.getScaledWidth() / (2f * scale.getVal()) ) - 27), (float) (sr.getScaledHeight() / (1f * scale.getVal()) - 54), (float) ((sr.getScaledWidth() / (2f * scale.getVal()) ) - 27) + 75, (float) (sr.getScaledHeight() / (1f * scale.getVal()) - 54) + 15, 5, 4,Color.DARK_GRAY.getRGB());
+                    RoundedUtil.drawRoundedRect((float) ((sr.getScaledWidth() / (2f * scale.getVal()) ) - 27), (float) (sr.getScaledHeight() / (1f * scale.getVal()) - 54), 75, 15, 5, Color.LIGHT_GRAY.getRGB());
+                    RoundedUtil.drawRoundedOutline((float) ((sr.getScaledWidth() / (2f * scale.getVal()) ) - 27), (float) (sr.getScaledHeight() / (1f * scale.getVal()) - 54), 75, 15, 5, 4,Color.DARK_GRAY.getRGB());
                     GlStateManager.scale(1f/2, 1f/2, 1);
                     GlStateManager.scale(1.5, 1.5, 1);
                     drawArmor(sr, target, (int) (sr.getScaledWidth() / (2f * 1.5) ) - 34, (int) (sr.getScaledHeight() / (1f * 1.5) - 70));

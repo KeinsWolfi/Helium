@@ -11,6 +11,7 @@ import me.helium9.settings.impl.ModeSetting;
 import me.helium9.settings.impl.RGBSetting;
 import me.helium9.util.render.ColorUtil;
 import me.helium9.util.render.RenderUtil;
+import me.helium9.util.render.RoundedUtil;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
 import net.minecraft.client.Minecraft;
@@ -77,7 +78,7 @@ public class WaterMark extends Module {
 
         GlStateManager.scale(scale.getVal(), scale.getVal(),1);
         if(background.isState())
-            RenderUtil.rect(x.getVal()-2, y.getVal()-2, fr.getStringWidth(finalText)+3, fr.FONT_HEIGHT+2, new Color(100, 100, 100 ,200));
+            RoundedUtil.drawRoundedRect((float) (x.getVal()-2), (float) (y.getVal()-2), fr.getStringWidth(finalText)+3, fr.FONT_HEIGHT+2, 5, new Color(100, 100, 100 ,200).getRGB());
         if(rainbow.isState()){
             fr.drawString(finalText, x.getVal(), y.getVal(), new Color(Color.HSBtoRGB(hue, 1, 0.8f)).getRGB());
         }else {

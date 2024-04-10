@@ -65,21 +65,21 @@ public class RoundedUtil {
         for (i = 0; i <= 90; i += 3)
             glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
+            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         for (i = 0; i <= 90; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
         glEnd();
         glBegin(GL_LINE_LOOP);
         for (i = 0; i <= 90; i += 3)
             glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
+            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         for (i = 0; i <= 90; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
         glEnd();
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
@@ -108,11 +108,11 @@ public class RoundedUtil {
         for (i = 0; i <= 90; i += 3)
             glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
+            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         for (i = 0; i <= 90; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d( x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
         glEnd();
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
@@ -151,11 +151,11 @@ public class RoundedUtil {
         for (i = 0; i <= 90; i += 3)
             glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
+            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         for (i = 0; i <= 90; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
         glEnd();
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
@@ -202,11 +202,11 @@ public class RoundedUtil {
         for (i = 0; i <= 90; i += 3)
             glVertex2d(x + radius1 + Math.sin(i * Math.PI / 180.0D) * radius1 * -1.0D, y + radius1 + Math.cos(i * Math.PI / 180.0D) * radius1 * -1.0D);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x + radius2 + Math.sin(i * Math.PI / 180.0D) * radius2 * -1.0D, y1 - radius2 + Math.cos(i * Math.PI / 180.0D) * radius2 * -1.0D);
+            glVertex2d(x + radius2 + Math.sin(i * Math.PI / 180.0D) * radius2 * -1.0D, y + y1 - radius2 + Math.cos(i * Math.PI / 180.0D) * radius2 * -1.0D);
         for (i = 0; i <= 90; i += 3)
-            glVertex2d(x1 - radius3 + Math.sin(i * Math.PI / 180.0D) * radius3, y1 - radius3 + Math.cos(i * Math.PI / 180.0D) * radius3);
+            glVertex2d(x + x1 - radius3 + Math.sin(i * Math.PI / 180.0D) * radius3, y + y1 - radius3 + Math.cos(i * Math.PI / 180.0D) * radius3);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x1 - radius4 + Math.sin(i * Math.PI / 180.0D) * radius4, y + radius4 + Math.cos(i * Math.PI / 180.0D) * radius4);
+            glVertex2d(x + x1 - radius4 + Math.sin(i * Math.PI / 180.0D) * radius4, y + radius4 + Math.cos(i * Math.PI / 180.0D) * radius4);
         glEnd();
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
@@ -249,11 +249,11 @@ public class RoundedUtil {
         for (i = 0; i <= 90; i += 3)
             glVertex2d(x + radius1 + Math.sin(i * Math.PI / 180.0D) * radius1 * -1.0D, y + radius1 + Math.cos(i * Math.PI / 180.0D) * radius1 * -1.0D);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x + radius2 + Math.sin(i * Math.PI / 180.0D) * radius2 * -1.0D, y1 - radius2 + Math.cos(i * Math.PI / 180.0D) * radius2 * -1.0D);
+            glVertex2d(x + radius2 + Math.sin(i * Math.PI / 180.0D) * radius2 * -1.0D, y + y1 - radius2 + Math.cos(i * Math.PI / 180.0D) * radius2 * -1.0D);
         for (i = 0; i <= 90; i += 3)
-            glVertex2d(x1 - radius3 + Math.sin(i * Math.PI / 180.0D) * radius3, y1 - radius3 + Math.cos(i * Math.PI / 180.0D) * radius3);
+            glVertex2d(x + x1 - radius3 + Math.sin(i * Math.PI / 180.0D) * radius3, y + y1 - radius3 + Math.cos(i * Math.PI / 180.0D) * radius3);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x1 - radius4 + Math.sin(i * Math.PI / 180.0D) * radius4, y + radius4 + Math.cos(i * Math.PI / 180.0D) * radius4);
+            glVertex2d(x + x1 - radius4 + Math.sin(i * Math.PI / 180.0D) * radius4, y + radius4 + Math.cos(i * Math.PI / 180.0D) * radius4);
         glEnd();
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
@@ -315,13 +315,13 @@ public class RoundedUtil {
             glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         setColor(color2);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
+            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         setColor(color3);
         for (i = 0; i <= 90; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
         setColor(color4);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
         glEnd();
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
@@ -378,13 +378,13 @@ public class RoundedUtil {
             glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         setColor(color2);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
+            glVertex2d(x + radius + Math.sin(i * Math.PI / 180.0D) * radius * -1.0D, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius * -1.0D);
         setColor(color3);
         for (i = 0; i <= 90; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + y1 - radius + Math.cos(i * Math.PI / 180.0D) * radius);
         setColor(color4);
         for (i = 90; i <= 180; i += 3)
-            glVertex2d(x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
+            glVertex2d(x + x1 - radius + Math.sin(i * Math.PI / 180.0D) * radius, y + radius + Math.cos(i * Math.PI / 180.0D) * radius);
         glEnd();
         glLineWidth(1);
         glEnable(GL_TEXTURE_2D);

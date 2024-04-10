@@ -7,6 +7,7 @@ import me.helium9.module.ModuleInfo;
 import me.helium9.settings.impl.BooleanSetting;
 import me.helium9.settings.impl.DoubleSetting;
 import me.helium9.util.render.ColorUtil;
+import me.helium9.util.render.RoundedUtil;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
 import net.minecraft.client.gui.ScaledResolution;
@@ -33,12 +34,13 @@ public class BPSDisplay extends Module {
         ScaledResolution sr = new ScaledResolution(mc);
 
         float hue = ColorUtil.getHue(5);
-        String bpsText = EnumChatFormatting.DARK_GRAY + "BPS: §r" + String.format("%.2f", getBPS());
+        String bpsText = EnumChatFormatting.GRAY + "BPS: §r" + String.format("%.2f", getBPS());
         if(rainbow.isState()) {
+            RoundedUtil.drawRoundedRect(2, sr.getScaledHeight()-(6 + fr.FONT_HEIGHT), fr.getStringWidth(bpsText) + 2, fr.FONT_HEIGHT + 2, 2, new Color(16, 16, 16, 200).getRGB());
             fr.drawString(bpsText, 4, sr.getScaledHeight()-(4 + fr.FONT_HEIGHT), new Color(Color.HSBtoRGB(hue, 0.5f, 0.6f)).getRGB());
         }
         else {
-            fr.drawString(bpsText, sr.getScaledWidth(), sr.getScaledHeight(), Color.darkGray.getRGB());
+            fr.drawString(bpsText, sr.getScaledWidth(), sr.getScaledHeight(), Color.gray.getRGB());
         }
     });
 

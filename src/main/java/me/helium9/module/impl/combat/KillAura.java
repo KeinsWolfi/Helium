@@ -119,6 +119,8 @@ public class KillAura extends Module {
                     if(timer.hasTimeElapsed(100, true)) {
                         for (Entity entity : targets) {
                             mc.thePlayer.swingItem();
+                            EventAttack eventAttack = new EventAttack((EntityLivingBase) target);
+                            HeliumMain.BUS.post(eventAttack);
                             mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(entity, C02PacketUseEntity.Action.ATTACK));
                         }
                     }
@@ -145,9 +147,15 @@ public class KillAura extends Module {
 
     @Subscribe
     public final Listener<Event3D> on3D = new Listener<>(e -> {
-        if(targetEsp.isState()){
+        if(targetEsp.isState() && mode.getCurrentMode().equals("Single")){
             if(target != null){
-                BoxESPUtil.RenderEntityBox(target, 255, 0, 0, 255);
+                target.drawESP(255, 0, 0, 255);
+            }
+        } else if (targetEsp.isState() && mode.getCurrentMode().equals("Multi")){
+            if(!targets.isEmpty()){
+                for(Entity entity : targets){
+                    entity.drawESP(255, 0, 0, 255);
+                }
             }
         }
     });

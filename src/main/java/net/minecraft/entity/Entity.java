@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+
+import me.helium9.util.render.world.BoxESPUtil;
+import me.helium9.util.render.world.ESPUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
@@ -2801,5 +2804,9 @@ public abstract class Entity implements ICommandSender
         }
 
         EnchantmentHelper.applyArthropodEnchantments(entityLivingBaseIn, entityIn);
+    }
+
+    public void drawESP(int r, int g, int b, int a){
+        BoxESPUtil.RenderEntityBox(this, r, g, b, a);
     }
 }
