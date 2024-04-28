@@ -5,8 +5,11 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
+import lombok.Getter;
+import me.helium9.HeliumMain;
+import me.helium9.event.impl.update.EventSlowDown;
 import me.helium9.util.render.world.BoxESPUtil;
-import me.helium9.util.render.world.ESPUtil;
+import me.zero.alpine.event.EventPhase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
@@ -121,6 +124,7 @@ public abstract class Entity implements ICommandSender
      */
     public boolean isCollided;
     public boolean velocityChanged;
+    @Getter
     protected boolean isInWeb;
     private boolean isOutsideBorder;
 
@@ -604,13 +608,24 @@ public abstract class Entity implements ICommandSender
 
             if (this.isInWeb)
             {
+
+                EventSlowDown event = new EventSlowDown(EventSlowDown.type.COBWEB, this);
+                event.setEventPhase(EventPhase.PRE);
+                HeliumMain.BUS.post(event);
+
                 this.isInWeb = false;
-                x *= 0.25D;
-                y *= 0.05000000074505806D;
-                z *= 0.25D;
-                this.motionX = 0.0D;
-                this.motionY = 0.0D;
-                this.motionZ = 0.0D;
+
+                if(!event.isCancelled()) {
+                    x *= 0.25D;
+                    y *= 0.05000000074505806D;
+                    z *= 0.25D;
+                    this.motionX = 0.0D;
+                    this.motionY = 0.0D;
+                    this.motionZ = 0.0D;
+                }
+
+                event.setEventPhase(EventPhase.POST);
+                HeliumMain.BUS.post(event);
             }
 
             double d3 = x;

@@ -4,7 +4,9 @@ import me.helium9.HeliumMain;
 import me.helium9.command.CommandManager;
 import me.helium9.event.impl.update.EventMotion;
 import me.helium9.event.impl.update.EventMove;
+import me.helium9.event.impl.update.EventSlowDown;
 import me.helium9.event.impl.update.EventUpdate;
+import me.helium9.module.impl.motion.NoSlow;
 import me.zero.alpine.event.EventPhase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
@@ -199,9 +201,6 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onUpdateWalkingPlayer()
     {
-
-
-
         boolean flag = this.isSprinting();
 
         if (flag != this.serverSprintState)
@@ -823,9 +822,16 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
         if (this.isUsingItem() && !this.isRiding())
         {
-            this.movementInput.moveStrafe *= 0.2F;
-            this.movementInput.moveForward *= 0.2F;
-            this.sprintToggleTimer = 0;
+
+            EventSlowDown event = new EventSlowDown(EventSlowDown.type.USE, this);
+            event.setEventPhase(EventPhase.PRE);
+            HeliumMain.BUS.post(event);
+
+            if(!event.isCancelled()) {
+                this.movementInput.moveStrafe *= 0.2F;
+                this.movementInput.moveForward *= 0.2F;
+                this.sprintToggleTimer = 0;
+            }
         }
 
         this.pushOutOfBlocks(this.posX - (double)this.width * 0.35D, this.getEntityBoundingBox().minY + 0.5D, this.posZ + (double)this.width * 0.35D);
@@ -834,7 +840,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
         this.pushOutOfBlocks(this.posX + (double)this.width * 0.35D, this.getEntityBoundingBox().minY + 0.5D, this.posZ + (double)this.width * 0.35D);
         boolean flag3 = (float)this.getFoodStats().getFoodLevel() > 6.0F || this.capabilities.allowFlying;
 
-        if (this.onGround && !flag1 && !flag2 && this.movementInput.moveForward >= f && !this.isSprinting() && flag3 && !this.isUsingItem() && !this.isPotionActive(Potion.blindness))
+        if (this.onGround && !flag1 && !flag2 && this.movementInput.moveForward >= f && !this.isSprinting() && flag3 && (!this.isUsingItem() || (HeliumMain.INSTANCE.getMm().getModule(NoSlow.class).isToggled() && NoSlow.use.isState())) && !this.isPotionActive(Potion.blindness))
         {
             if (this.sprintToggleTimer <= 0 && !this.mc.gameSettings.keyBindSprint.isKeyDown())
             {

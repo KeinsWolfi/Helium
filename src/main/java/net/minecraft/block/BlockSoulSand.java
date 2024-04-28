@@ -1,5 +1,8 @@
 package net.minecraft.block;
 
+import me.helium9.HeliumMain;
+import me.helium9.event.impl.update.EventSlowDown;
+import me.zero.alpine.event.EventPhase;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -28,7 +31,14 @@ public class BlockSoulSand extends Block
      */
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
-        entityIn.motionX *= 0.4D;
-        entityIn.motionZ *= 0.4D;
+
+        EventSlowDown event = new EventSlowDown(EventSlowDown.type.SOUL_SAND, entityIn);
+        event.setEventPhase(EventPhase.PRE);
+        HeliumMain.BUS.post(event);
+
+        if(!event.isCancelled()) {
+            entityIn.motionX *= 0.4D;
+            entityIn.motionZ *= 0.4D;
+        }
     }
 }
