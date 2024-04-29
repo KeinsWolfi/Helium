@@ -17,7 +17,7 @@ import me.zero.alpine.listener.Subscribe;
 public class Strafe extends Module {
 
 
-    private final ModeSetting mode = new ModeSetting("Mode", "Vanilla");
+    private final ModeSetting mode = new ModeSetting("Mode", "Vanilla", "Ground");
 
     public Strafe() {
     }
