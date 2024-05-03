@@ -7,11 +7,13 @@ import me.helium9.module.Category;
 import me.helium9.module.Module;
 import me.helium9.module.ModuleInfo;
 import me.helium9.settings.impl.DoubleSetting;
+import me.helium9.util.PacketUtil;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.client.C0DPacketCloseWindow;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
@@ -58,7 +60,7 @@ public class ChestStealer extends Module {
 
         items.forEach(s -> {
             ItemStack stack = chest.getLowerChestInventory().getStackInSlot(s);
-            if(System.currentTimeMillis() > lastTime+delay.getVal()+randomDelay){
+            if(System.currentTimeMillis() > (lastTime+delay.getVal()+randomDelay)){
                 mc.playerController.windowClick(chest.windowId, s, 0, 1, mc.thePlayer);
                 lastTime = System.currentTimeMillis();
             }

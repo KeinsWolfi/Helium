@@ -236,6 +236,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private Entity renderViewEntity;
     public Entity pointedEntity;
     public EffectRenderer effectRenderer;
+    @Setter
     public Session session;
     private boolean isGamePaused;
 

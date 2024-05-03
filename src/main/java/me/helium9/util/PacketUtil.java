@@ -6,7 +6,7 @@ import net.minecraft.network.Packet;
 public class PacketUtil {
 
     public static void sendPacket(Packet<?> packet){
-        HeliumMain.INSTANCE.getMc().thePlayer.sendQueue.addToSendQueue(packet);
+        HeliumMain.INSTANCE.getMc().getNetHandler().getNetworkManager().sendPacket(packet);
     }
 
 }

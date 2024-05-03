@@ -2,7 +2,11 @@ package me.helium9.screens.altmgr;
 
 import java.io.IOException;
 
+import fr.litarvan.openauth.microsoft.MicrosoftAuthResult;
+import fr.litarvan.openauth.microsoft.MicrosoftAuthenticationException;
+import fr.litarvan.openauth.microsoft.MicrosoftAuthenticator;
 import me.helium9.HeliumMain;
+import net.minecraft.util.Session;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -71,7 +75,10 @@ public class GuiAltManager
                 break;
             }
 
-
+            case 7: {
+                this.mc.displayGuiScreen(new GuiAddMicrosoft(this));
+                break;
+            }
 
         }
     }
@@ -162,8 +169,7 @@ public class GuiAltManager
         this.buttonList.add(new GuiButton(4, width / 2 - 50, height - 48, 100, 20, "Direct Login"));
         this.rename = new GuiButton(6, width / 2 - 50, height - 24, 100, 20, "Edit");
         this.buttonList.add(this.rename);
-        this.buttonList.add(new GuiButton(7, width - 80, 0, 80, 20, "Import Alts"));
-        this.buttonList.add(new GuiButton(8, width - 160, 0, 80, 20, "Export Alts"));
+        this.buttonList.add(new GuiButton(7, width - 80, 0, 80, 20, "Microsoft"));
         this.login.enabled = false;
         this.remove.enabled = false;
         this.rename.enabled = false;

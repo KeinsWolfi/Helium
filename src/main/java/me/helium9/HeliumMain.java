@@ -1,5 +1,8 @@
 package me.helium9;
 
+import fr.litarvan.openauth.microsoft.MicrosoftAuthResult;
+import fr.litarvan.openauth.microsoft.MicrosoftAuthenticationException;
+import fr.litarvan.openauth.microsoft.MicrosoftAuthenticator;
 import lombok.Getter;
 import me.helium9.command.CommandManager;
 import me.helium9.event.impl.input.EventKey;
@@ -14,6 +17,7 @@ import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
 import me.zero.alpine.listener.Subscriber;
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.Session;
 import org.lwjgl.opengl.Display;
 
 @Getter

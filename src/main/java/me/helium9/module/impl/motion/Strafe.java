@@ -5,6 +5,7 @@ import me.helium9.module.Category;
 import me.helium9.module.Module;
 import me.helium9.module.ModuleInfo;
 import me.helium9.settings.impl.ModeSetting;
+import me.helium9.util.player.MovementUtil;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
 
@@ -26,8 +27,8 @@ public class Strafe extends Module {
     public final Listener<EventMotion> onMotion = new Listener<>(e -> {
         switch (mode.getCurrentMode()){
             case "Vanilla":
-
+                MovementUtil.strafe();
+                break;
         }
     });
-
 }

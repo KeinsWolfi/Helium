@@ -10,6 +10,7 @@ import me.helium9.settings.impl.DoubleSetting;
 import me.helium9.util.render.world.BoxESPUtil;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import org.lwjgl.input.Keyboard;
 
@@ -64,13 +65,13 @@ public class Freecam extends Module {
     }
 
     @Subscribe
-    private final Listener<EventUpdate> onUpdate = new Listener<>(e -> {
+    private final Listener<Event3D> onUpdate = new Listener<>(e -> {
         mc.thePlayer.setSprinting(false);
         mc.thePlayer.moveForward = 0.0F;
         mc.thePlayer.moveStrafing = 0.0F;
         en.rotationYaw = en.rotationYawHead = mc.thePlayer.rotationYaw;
         en.rotationPitch = mc.thePlayer.rotationPitch;
-        double s = speed.getVal() * 0.2;
+        double s = speed.getVal() * ( 10d / Minecraft.getDebugFPS());
         EntityOtherPlayerMP var10000;
         double rad;
         double dx;
