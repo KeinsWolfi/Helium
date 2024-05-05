@@ -10,6 +10,7 @@ import me.helium9.util.ChatUtil;
 import me.zero.alpine.listener.Subscriber;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.util.EnumChatFormatting;
 import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
@@ -129,4 +130,9 @@ public abstract class Module implements Subscriber {
     public void stopHotkeySelection() {
             selectingHotkey = false;
     }
+
+    public void setDisplayName(String name, String params) {
+        this.displayName = name + " " + EnumChatFormatting.GRAY + params;
+    }
+
 }
