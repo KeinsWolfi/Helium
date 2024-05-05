@@ -1,5 +1,7 @@
 package me.helium9.util.render.world;
 
+import me.helium9.HeliumMain;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
 import static me.helium9.util.render.world.BoxESPUtil.disableCaps;
@@ -13,6 +15,13 @@ public class RenderDot {
         GlStateManager.disableTexture2D();
         enableCaps(GL_BLEND, GL_POINT_SMOOTH, GL_POLYGON_SMOOTH, GL_LINE_SMOOTH);
 
+        Minecraft mc = HeliumMain.INSTANCE.getMc();
+
+        //x = x - mc.getRenderManager().viewerPosX;
+        //y = y - mc.getRenderManager().viewerPosY;
+        //z = z - mc.getRenderManager().viewerPosZ;
+
+        glTranslated(-mc.getRenderManager().viewerPosX, -mc.getRenderManager().viewerPosY, -mc.getRenderManager().viewerPosZ);
         glDisable(GL_DEPTH_TEST);
         glDepthMask(false);
         glPointSize((float) radius);
@@ -35,6 +44,14 @@ public class RenderDot {
         GlStateManager.disableTexture2D();
         enableCaps(GL_BLEND, GL_LINE_SMOOTH, GL_POLYGON_SMOOTH, GL_POINT_SMOOTH);
 
+        //xStart = xStart - Minecraft.getMinecraft().getRenderManager().viewerPosX;
+        //yStart = yStart - Minecraft.getMinecraft().getRenderManager().viewerPosY;
+        //zStart = zStart - Minecraft.getMinecraft().getRenderManager().viewerPosZ;
+        //xEnd = xEnd - Minecraft.getMinecraft().getRenderManager().viewerPosX;
+        //yEnd = yEnd - Minecraft.getMinecraft().getRenderManager().viewerPosY;
+        //zEnd = zEnd - Minecraft.getMinecraft().getRenderManager().viewerPosZ;
+
+        glTranslated(-Minecraft.getMinecraft().getRenderManager().viewerPosX, -Minecraft.getMinecraft().getRenderManager().viewerPosY, -Minecraft.getMinecraft().getRenderManager().viewerPosZ);
         glDisable(GL_DEPTH_TEST);
         glDepthMask(false);
         glLineWidth((float) width);
