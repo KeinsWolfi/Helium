@@ -60,7 +60,7 @@ public class ItemAliases
             else
             {
                 List<Integer> list = new ArrayList();
-                String s = "/shaders/item.properties";
+                String s = "/assets/minecraft/helium/shader/item.properties";
                 InputStream inputstream = shaderPack.getResourceAsStream(s);
 
                 if (inputstream != null)
@@ -88,7 +88,7 @@ public class ItemAliases
 
             try
             {
-                ResourceLocation resourcelocation = new ResourceLocation(s, "shaders/item.properties");
+                ResourceLocation resourcelocation = new ResourceLocation(s, "assets/minecraft/helium/shader/item.properties");
                 InputStream inputstream = Config.getResourceStream(resourcelocation);
                 loadItemAliases(inputstream, resourcelocation.toString(), listItemAliases);
             }

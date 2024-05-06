@@ -279,7 +279,7 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
                 ShaderLinkHelper.setNewStaticShaderLinkHelper();
             }
 
-            ResourceLocation resourcelocation = new ResourceLocation("shaders/post/entity_outline.json");
+            ResourceLocation resourcelocation = new ResourceLocation("assets/minecraft/helium/shader/post/entity_outline.json");
 
             try
             {

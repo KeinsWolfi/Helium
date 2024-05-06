@@ -34,7 +34,7 @@ public class ShaderOptionSwitchConst extends ShaderOptionSwitch
 
             if (s != null && s.length() > 0)
             {
-                path = StrUtils.removePrefix(path, "/shaders/");
+                path = StrUtils.removePrefix(path, "/assets/minecraft/helium/shader/");
                 ShaderOption shaderoption = new ShaderOptionSwitchConst(s, s2, s1, path);
                 shaderoption.setVisible(false);
                 return shaderoption;

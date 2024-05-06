@@ -11,6 +11,7 @@ import me.helium9.screens.altmgr.AltManager;
 import me.helium9.screens.dropdown.DropDownGui;
 import me.helium9.screens.rise.ClickGui.ClickGui;
 import me.helium9.settings.SettingManager;
+import me.helium9.util.render.shader.BlurUtil;
 import me.zero.alpine.bus.EventBus;
 import me.zero.alpine.bus.EventManager;
 import me.zero.alpine.listener.Listener;
@@ -48,6 +49,8 @@ public enum HeliumMain implements Subscriber {
 
     private AltManager am;
 
+    private BlurUtil blurUtil;
+
     public final void init(){
         BUS.subscribe(this);
         Display.setTitle(name + "  |  " + version);
@@ -60,6 +63,8 @@ public enum HeliumMain implements Subscriber {
         //gui = new ClickGui();
 
         am = new AltManager();
+
+        blurUtil = new BlurUtil();
     }
 
     public final void shutdown(){

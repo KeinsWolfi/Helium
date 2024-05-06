@@ -4,11 +4,13 @@ import me.helium9.HeliumMain;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
+import java.awt.*;
+
 import static me.helium9.util.render.world.BoxESPUtil.disableCaps;
 import static me.helium9.util.render.world.BoxESPUtil.enableCaps;
 import static org.lwjgl.opengl.GL11.*;
 
-public class RenderDot {
+public class WorldRender {
     public static void renderDot(double x, double y, double z, double radius, double r, double g, double b, double a){
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
@@ -36,6 +38,9 @@ public class RenderDot {
         GlStateManager.disableBlend();
         GlStateManager.popMatrix();
         glColor4f(1, 1, 1, 1);
+    }
+    public static void renderDot(double x, double y, double z, double radius, Color color){
+        renderDot(x, y, z, radius, color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 
     public static void renderLine(double xStart, double yStart, double zStart, double xEnd, double yEnd, double zEnd, double width, double r, double g, double b, double a){
@@ -68,6 +73,9 @@ public class RenderDot {
         GlStateManager.popMatrix();
         glColor4f(1, 1, 1, 1);
         glLineWidth(1f);
+    }
+    public static void renderLine(double xStart, double yStart, double zStart, double xEnd, double yEnd, double zEnd, double width, Color color){
+        renderLine(xStart, yStart, zStart, xEnd, yEnd, zEnd, width, color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
     }
 
 }

@@ -427,7 +427,7 @@ public class Shaders
     static ShaderProfile[] shaderPackProfiles = null;
     static Map<String, ScreenShaderOptions> shaderPackGuiScreens = null;
     static Map<String, IExpressionBool> shaderPackProgramConditions = new HashMap();
-    public static final String PATH_SHADERS_PROPERTIES = "/shaders/shaders.properties";
+    public static final String PATH_SHADERS_PROPERTIES = "/assets/minecraft/helium/shader/shaders.properties";
     public static PropertyDefaultFastFancyOff shaderPackClouds = new PropertyDefaultFastFancyOff("clouds", "Clouds", 0);
     public static PropertyDefaultTrueFalse shaderPackOldLighting = new PropertyDefaultTrueFalse("oldLighting", "Classic Lighting", 0);
     public static PropertyDefaultTrueFalse shaderPackOldHandLight = new PropertyDefaultTrueFalse("oldHandLight", "Old Hand Light", 0);
@@ -956,7 +956,7 @@ public class Shaders
 
         for (int i = -128; i <= 128; ++i)
         {
-            String s = "/shaders/world" + i;
+            String s = "/assets/minecraft/helium/shader/world" + i;
 
             if (shaderPack.hasDirectory(s))
             {
@@ -1006,7 +1006,7 @@ public class Shaders
             BlockAliases.update(shaderPack);
             ItemAliases.update(shaderPack);
             EntityAliases.update(shaderPack);
-            String s = "/shaders/shaders.properties";
+            String s = "/assets/minecraft/helium/shader/shaders.properties";
 
             try
             {
@@ -1245,7 +1245,7 @@ public class Shaders
     {
         try
         {
-            String s = "shaders/" + StrUtils.removePrefix(path, "/");
+            String s = "assets/minecraft/helium/shader/" + StrUtils.removePrefix(path, "/");
             InputStream inputstream = shaderPack.getResourceAsStream(s);
 
             if (inputstream == null)
@@ -1283,7 +1283,7 @@ public class Shaders
 
         try
         {
-            String s = "shaders/" + StrUtils.removePrefix(path, "/");
+            String s = "assets/minecraft/helium/shader/" + StrUtils.removePrefix(path, "/");
             InputStream inputstream = shaderPack.getResourceAsStream(s);
 
             if (inputstream == null)
@@ -1842,7 +1842,7 @@ public class Shaders
                 {
                     if (!s.equals("debug"))
                     {
-                        File file2 = new File(file1, "shaders");
+                        File file2 = new File(file1, "assets/minecraft/helium/shader");
 
                         if (file2.exists() && file2.isDirectory())
                         {
@@ -2256,7 +2256,7 @@ public class Shaders
                         s2 = s + s1;
                     }
 
-                    String s3 = "/shaders/" + s2;
+                    String s3 = "/assets/minecraft/helium/shader/" + s2;
                     String s4 = s3 + ".vsh";
                     String s5 = s3 + ".gsh";
                     String s6 = s3 + ".fsh";
@@ -5617,7 +5617,7 @@ public class Shaders
         if (shaderPackLoaded)
         {
             List<String> list = new ArrayList();
-            String s = "/shaders/lang/";
+            String s = "/assets/minecraft/helium/shader/lang/";
             String s1 = "en_US";
             String s2 = ".lang";
             list.add(s + s1 + s2);

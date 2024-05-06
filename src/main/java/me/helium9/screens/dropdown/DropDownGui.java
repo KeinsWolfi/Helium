@@ -2,6 +2,7 @@ package me.helium9.screens.dropdown;
 
 import me.helium9.HeliumMain;
 import me.helium9.module.Category;
+import me.helium9.module.Module;
 import me.helium9.module.impl.visual.ClickGUI;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
@@ -13,6 +14,8 @@ import java.util.List;
 public class DropDownGui extends GuiScreen {
 
     private final List<Frame> frames;
+
+    public static Module extendedModule;
 
     public DropDownGui(){
         frames = new ArrayList<>();
@@ -50,6 +53,14 @@ public class DropDownGui extends GuiScreen {
             frame.mouseClicked(mouseX, mouseY, mouseButton);
         }
         super.mouseClicked(mouseX, mouseY, mouseButton);
+    }
+
+    @Override
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
+        for(Frame frame : frames){
+            frame.mouseReleased(mouseX, mouseY, state);
+        }
+        super.mouseReleased(mouseX, mouseY, state);
     }
 
     @Override

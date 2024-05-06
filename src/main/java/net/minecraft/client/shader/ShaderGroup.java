@@ -18,6 +18,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.util.JsonException;
+import net.minecraft.util.HttpUtil;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import org.apache.commons.io.IOUtils;
@@ -26,7 +27,7 @@ import org.lwjgl.util.vector.Matrix4f;
 
 public class ShaderGroup
 {
-    private Framebuffer mainFramebuffer;
+    public Framebuffer mainFramebuffer;
     private IResourceManager resourceManager;
     private String shaderGroupName;
     private final List<Shader> listShaders = Lists.<Shader>newArrayList();
@@ -403,5 +404,9 @@ public class ShaderGroup
     private Framebuffer getFramebuffer(String p_148017_1_)
     {
         return p_148017_1_ == null ? null : (p_148017_1_.equals("minecraft:main") ? this.mainFramebuffer : (Framebuffer)this.mapFramebuffers.get(p_148017_1_));
+    }
+
+    public List<Shader> getShaders() {
+        return listShaders;
     }
 }

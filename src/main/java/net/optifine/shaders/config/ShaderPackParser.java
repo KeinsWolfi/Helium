@@ -62,13 +62,13 @@ public class ShaderPackParser
         else
         {
             Map<String, ShaderOption> map = new HashMap();
-            collectShaderOptions(shaderPack, "/shaders", programNames, map);
+            collectShaderOptions(shaderPack, "/assets/minecraft/helium/shader", programNames, map);
             Iterator<Integer> iterator = listDimensions.iterator();
 
             while (iterator.hasNext())
             {
                 int i = ((Integer)iterator.next()).intValue();
-                String s = "/shaders/world" + i;
+                String s = "/assets/minecraft/helium/shader/world" + i;
                 collectShaderOptions(shaderPack, s, programNames, map);
             }
 
@@ -647,7 +647,7 @@ public class ShaderPackParser
             {
                 String s6 = matcher1.group(1);
                 boolean flag = s6.startsWith("/");
-                String s8 = flag ? "/shaders" + s6 : s + "/" + s6;
+                String s8 = flag ? "/assets/minecraft/helium/shader" + s6 : s + "/" + s6;
 
                 if (!listFiles.contains(s8))
                 {

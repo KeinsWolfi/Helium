@@ -28,12 +28,18 @@ public class Frame {
 
     public int x, y, width, height;
 
+    private int deltaX, deltaY, frameStartX, frameStartY, mouseStartX, mouseStartY;
+
+    public boolean dragging = false;
+
     public Frame(Category cat, int x, int y, int width, int height){
         this.cat = cat;
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.deltaX = 0;
+        this.deltaY = 0;
 
         modules = new ArrayList<>();
 
@@ -43,7 +49,7 @@ public class Frame {
 
         moduleButtons = new ArrayList<>();
 
-        int offset = height+1;
+        int offset = 1;
         for(Module mod : modules){
             moduleButtons.add(new ModuleButtons(mod, this, offset));
             offset+=height+1;
@@ -65,6 +71,15 @@ public class Frame {
         }else{
             fr.drawString("+", x + 75, y+4, -1);
         }
+
+        if(dragging){
+            x = frameStartX + deltaX;
+            y = frameStartY + deltaY;
+        }
+
+        deltaX = mouseX - mouseStartX;
+        deltaY = mouseY - mouseStartY;
+
     }
 
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
@@ -80,6 +95,17 @@ public class Frame {
         if(HoverUtil.isRectHovered(x, y, width, height, mouseX, mouseY) && mouseButton == 1){
             extended=!extended;
         }
+        if(HoverUtil.isRectHovered(x, y, width, height, mouseX, mouseY) && mouseButton == 0){
+            dragging = true;
+            frameStartX = this.x;
+            frameStartY = this.y;
+            mouseStartX = mouseX;
+            mouseStartY = mouseY;
+        }
+    }
+
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
+        dragging = false;
     }
 
 }

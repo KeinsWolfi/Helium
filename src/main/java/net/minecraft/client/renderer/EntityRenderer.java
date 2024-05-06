@@ -54,7 +54,6 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.event.ClickEvent;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -64,7 +63,6 @@ import net.minecraft.src.Config;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -206,7 +204,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
     private double cameraYaw;
     private double cameraPitch;
     private ShaderGroup theShaderGroup;
-    private static final ResourceLocation[] shaderResourceLocations = new ResourceLocation[] {new ResourceLocation("shaders/post/notch.json"), new ResourceLocation("shaders/post/fxaa.json"), new ResourceLocation("shaders/post/art.json"), new ResourceLocation("shaders/post/bumpy.json"), new ResourceLocation("shaders/post/blobs2.json"), new ResourceLocation("shaders/post/pencil.json"), new ResourceLocation("shaders/post/color_convolve.json"), new ResourceLocation("shaders/post/deconverge.json"), new ResourceLocation("shaders/post/flip.json"), new ResourceLocation("shaders/post/invert.json"), new ResourceLocation("shaders/post/ntsc.json"), new ResourceLocation("shaders/post/outline.json"), new ResourceLocation("shaders/post/phosphor.json"), new ResourceLocation("shaders/post/scan_pincushion.json"), new ResourceLocation("shaders/post/sobel.json"), new ResourceLocation("shaders/post/bits.json"), new ResourceLocation("shaders/post/desaturate.json"), new ResourceLocation("shaders/post/green.json"), new ResourceLocation("shaders/post/blur.json"), new ResourceLocation("shaders/post/wobble.json"), new ResourceLocation("shaders/post/blobs.json"), new ResourceLocation("shaders/post/antialias.json"), new ResourceLocation("shaders/post/creeper.json"), new ResourceLocation("shaders/post/spider.json")};
+    private static final ResourceLocation[] shaderResourceLocations = new ResourceLocation[] {new ResourceLocation("assets/minecraft/helium/shader/post/notch.json"), new ResourceLocation("assets/minecraft/helium/shader/post/fxaa.json"), new ResourceLocation("assets/minecraft/helium/shader/post/art.json"), new ResourceLocation("assets/minecraft/helium/shader/post/bumpy.json"), new ResourceLocation("assets/minecraft/helium/shader/post/blobs2.json"), new ResourceLocation("assets/minecraft/helium/shader/post/pencil.json"), new ResourceLocation("assets/minecraft/helium/shader/post/color_convolve.json"), new ResourceLocation("assets/minecraft/helium/shader/post/deconverge.json"), new ResourceLocation("assets/minecraft/helium/shader/post/flip.json"), new ResourceLocation("assets/minecraft/helium/shader/post/invert.json"), new ResourceLocation("assets/minecraft/helium/shader/post/ntsc.json"), new ResourceLocation("assets/minecraft/helium/shader/post/outline.json"), new ResourceLocation("assets/minecraft/helium/shader/post/phosphor.json"), new ResourceLocation("assets/minecraft/helium/shader/post/scan_pincushion.json"), new ResourceLocation("assets/minecraft/helium/shader/post/sobel.json"), new ResourceLocation("assets/minecraft/helium/shader/post/bits.json"), new ResourceLocation("assets/minecraft/helium/shader/post/desaturate.json"), new ResourceLocation("assets/minecraft/helium/shader/post/green.json"), new ResourceLocation("assets/minecraft/helium/shader/post/blur.json"), new ResourceLocation("assets/minecraft/helium/shader/post/wobble.json"), new ResourceLocation("assets/minecraft/helium/shader/post/blobs.json"), new ResourceLocation("assets/minecraft/helium/shader/post/antialias.json"), new ResourceLocation("assets/minecraft/helium/shader/post/creeper.json"), new ResourceLocation("assets/minecraft/helium/shader/post/spider.json")};
     public static final int shaderCount = shaderResourceLocations.length;
     private int shaderIndex;
     private boolean useShader;
@@ -289,15 +287,15 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
             if (entityIn instanceof EntityCreeper)
             {
-                this.loadShader(new ResourceLocation("shaders/post/creeper.json"));
+                this.loadShader(new ResourceLocation("assets/minecraft/helium/shader/post/creeper.json"));
             }
             else if (entityIn instanceof EntitySpider)
             {
-                this.loadShader(new ResourceLocation("shaders/post/spider.json"));
+                this.loadShader(new ResourceLocation("assets/minecraft/helium/shader/post/spider.json"));
             }
             else if (entityIn instanceof EntityEnderman)
             {
-                this.loadShader(new ResourceLocation("shaders/post/invert.json"));
+                this.loadShader(new ResourceLocation("assets/minecraft/helium/shader/post/invert.json"));
             }
             else if (Reflector.ForgeHooksClient_loadEntityShader.exists())
             {
@@ -2791,7 +2789,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         }
         else
         {
-            this.loadShader(new ResourceLocation("shaders/post/fxaa_of_" + p_setFxaaShader_1_ + "x.json"));
+            this.loadShader(new ResourceLocation("assets/minecraft/helium/shader/post/fxaa_of_" + p_setFxaaShader_1_ + "x.json"));
             this.fxaaShaders[p_setFxaaShader_1_] = this.theShaderGroup;
             return this.useShader;
         }

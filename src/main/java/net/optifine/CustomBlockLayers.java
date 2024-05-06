@@ -59,7 +59,7 @@ public class CustomBlockLayers
 
             if (propertiesordered != null)
             {
-                String s1 = "shaders/block.properties";
+                String s1 = "assets/minecraft/helium/shader/block.properties";
                 readLayers(s1, propertiesordered, list);
             }
         }

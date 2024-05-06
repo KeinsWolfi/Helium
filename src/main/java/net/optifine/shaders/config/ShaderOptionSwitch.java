@@ -50,7 +50,7 @@ public class ShaderOptionSwitch extends ShaderOption
             {
                 boolean flag = Config.equals(s, "//");
                 boolean flag1 = !flag;
-                path = StrUtils.removePrefix(path, "/shaders/");
+                path = StrUtils.removePrefix(path, "/assets/minecraft/helium/shader/");
                 ShaderOption shaderoption = new ShaderOptionSwitch(s1, s2, String.valueOf(flag1), path);
                 return shaderoption;
             }

@@ -59,7 +59,7 @@ public class EntityAliases
             else
             {
                 List<Integer> list = new ArrayList();
-                String s = "/shaders/entity.properties";
+                String s = "/assets/minecraft/helium/shader/entity.properties";
                 InputStream inputstream = shaderPack.getResourceAsStream(s);
 
                 if (inputstream != null)
@@ -87,7 +87,7 @@ public class EntityAliases
 
             try
             {
-                ResourceLocation resourcelocation = new ResourceLocation(s, "shaders/entity.properties");
+                ResourceLocation resourcelocation = new ResourceLocation(s, "assets/minecraft/helium/shader/entity.properties");
                 InputStream inputstream = Config.getResourceStream(resourcelocation);
                 loadEntityAliases(inputstream, resourcelocation.toString(), listEntityAliases);
             }

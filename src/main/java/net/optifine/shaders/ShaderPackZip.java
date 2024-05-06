@@ -100,7 +100,7 @@ public class ShaderPackZip implements IShaderPack
 
     private String detectBaseFolder(ZipFile zip)
     {
-        ZipEntry zipentry = zip.getEntry("shaders/");
+        ZipEntry zipentry = zip.getEntry("assets/minecraft/helium/shader/");
 
         if (zipentry != null && zipentry.isDirectory())
         {
@@ -123,7 +123,7 @@ public class ShaderPackZip implements IShaderPack
 
                     if (s1 != null)
                     {
-                        if (s1.equals("shaders/"))
+                        if (s1.equals("assets/minecraft/helium/shader/"))
                         {
                             return "";
                         }

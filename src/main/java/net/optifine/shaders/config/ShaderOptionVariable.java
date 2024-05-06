@@ -76,7 +76,7 @@ public class ShaderOptionVariable extends ShaderOption
 
             if (s != null && s.length() > 0)
             {
-                path = StrUtils.removePrefix(path, "/shaders/");
+                path = StrUtils.removePrefix(path, "/assets/minecraft/helium/shader/");
                 ShaderOption shaderoption = new ShaderOptionVariable(s, s2, s1, astring, path);
                 return shaderoption;
             }

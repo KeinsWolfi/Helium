@@ -98,7 +98,7 @@ class GuiSlotShaders extends GuiSlot
         }
         else
         {
-            InputStream inputstream = sp.getResourceAsStream("/shaders/shaders.properties");
+            InputStream inputstream = sp.getResourceAsStream("/assets/minecraft/helium/shader/shaders.properties");
             Properties properties = ResUtils.readProperties(inputstream, "Shaders");
 
             if (properties == null)

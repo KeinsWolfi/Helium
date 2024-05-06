@@ -80,7 +80,7 @@ public class BlockAliases
             else
             {
                 List<List<BlockAlias>> list = new ArrayList();
-                String s = "/shaders/block.properties";
+                String s = "/assets/minecraft/helium/shader/block.properties";
                 InputStream inputstream = shaderPack.getResourceAsStream(s);
 
                 if (inputstream != null)
@@ -108,7 +108,7 @@ public class BlockAliases
 
             try
             {
-                ResourceLocation resourcelocation = new ResourceLocation(s, "shaders/block.properties");
+                ResourceLocation resourcelocation = new ResourceLocation(s, "assets/minecraft/helium/shader/block.properties");
                 InputStream inputstream = Config.getResourceStream(resourcelocation);
                 loadBlockAliases(inputstream, resourcelocation.toString(), listBlockAliases);
             }
