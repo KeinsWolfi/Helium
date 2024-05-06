@@ -25,17 +25,17 @@ public class ModButton {
 	
 	public void render() {
 		
-		RoundedUtil.drawRoundedRect(x , y , x+w , y+h , 8, new Color(224,214,214,255).getRGB());
+		RoundedUtil.drawRoundedRect(x , y , x+w , y+h , 8, new Color(224,214,214,255));
 		RoundedUtil.drawRoundedRect((x+w)-28, (y+h)-18, (x+w)-5 , (y+h)-7, 8, getColor());
 		Minecraft.getMinecraft().fontRendererObj.drawString(mod.name, x +8, y +8, new Color(0,0,0,255).getRGB());
 
 	}
 	
-	private int getColor() {
+	private Color getColor() {
 		if(mod.isToggled()) {
-			return new Color(131,255,92,255).getRGB();
+			return new Color(131,255,92,255);
 		} else {
-			return new Color(255,64,59,255).getRGB();
+			return new Color(255,64,59,255);
 		}
 
 	}

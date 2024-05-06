@@ -95,8 +95,8 @@ public class ClickGui extends GuiScreen{
 		
 		GlStateManager.pushAttrib();
 		GlStateManager.pushMatrix();
-		RoundedUtil.drawRoundedRect(centerW - backgroundW, centerH - 100, centerW + backgroundW, centerH + 100, 8, new Color(245, 242, 233,255).getRGB());
-		RoundedUtil.drawRoundedRect(centerW - backgroundW + 390, centerH - 100, centerW + backgroundW, centerH + 100, 8, new Color(138, 66, 88,255).getRGB());
+		RoundedUtil.drawRoundedRect(centerW - backgroundW, centerH - 100, centerW + backgroundW, centerH + 100, 8, new Color(245, 242, 233,255));
+		RoundedUtil.drawRoundedRect(centerW - backgroundW + 390, centerH - 100, centerW + backgroundW, centerH + 100, 8, new Color(138, 66, 88,255));
 		GlStateManager.popMatrix();
 		msManager.render();
 		

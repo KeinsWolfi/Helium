@@ -20,8 +20,8 @@ public class ModSettingGui {
 	
 	
 	public void render() {
-		RoundedUtil.drawRoundedRect(x , y , x+w , y+h, 8, new Color(245, 242, 233,255).getRGB());
-		RoundedUtil.drawRoundedRect(x , y , x+w , y+10, 8, new Color(138, 66, 88,255).getRGB());
+		RoundedUtil.drawRoundedRect(x , y , x+w , y+h, 8, new Color(245, 242, 233,255));
+		RoundedUtil.drawRoundedRect(x , y , x+w , y+10, 8, new Color(138, 66, 88,255));
 		Minecraft.getMinecraft().fontRendererObj.drawString(mod.getName() + " : " + mod.isToggled(), x + 3, y + 13, new Color(0,0,0,255).getRGB());
 		Minecraft.getMinecraft().fontRendererObj.drawString(mod.description, x + 3, y + 23, new Color(0,0,0,255).getRGB());
 	}

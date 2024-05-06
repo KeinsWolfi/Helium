@@ -33,7 +33,7 @@ public class ClickGuiCategoryButton extends CategoryManager{
 	public void renderButton(){
 
 		if(animation.getOutput() >=x+1) {
-			RoundedUtil.drawRoundedRect(x, y, animation.getOutput().floatValue(), y+h, 5, new Color(191,226,246,255).getRGB());
+			RoundedUtil.drawRoundedRect(x, y, animation.getOutput().floatValue(), y+h, 5, new Color(191,226,246,255));
 			Minecraft.getMinecraft().fontRendererObj.drawString(name, x + w/2 - Minecraft.getMinecraft().fontRendererObj.getStringWidth(name)/2,
 					y + h/2 - Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT/2, new Color(
 							20, 23, 34,255).getRGB());

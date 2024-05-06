@@ -101,7 +101,7 @@ public class KillAura extends Module {
 
         if(!targets.isEmpty()) {
             target = targets.get(0);
-            if(target.isDead) return;
+            if(target.isDead || ((EntityLivingBase) target).deathTime > 0) return;
             switch (mode.getCurrentMode()){
                 case "Single":
                     mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, getRot(target)[0], getRot(target)[1], mc.thePlayer.onGround));
@@ -137,6 +137,7 @@ public class KillAura extends Module {
                             //mc.thePlayer.sendQueue.addToSendQueue(new C02PacketUseEntity(target, C02PacketUseEntity.Action.ATTACK));
                         }
                     }
+                    break;
             }
 
         }

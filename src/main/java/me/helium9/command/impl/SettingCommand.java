@@ -11,6 +11,8 @@ import me.helium9.settings.impl.DoubleSetting;
 import me.helium9.settings.impl.RGBSetting;
 import me.helium9.settings.impl.ModeSetting;
 import me.helium9.util.ChatUtil;
+import me.helium9.util.notifications.NotificationManager;
+import me.helium9.util.notifications.NotificationType;
 import net.minecraft.util.EnumChatFormatting;
 
 @CommandInfo(
@@ -50,6 +52,8 @@ public class SettingCommand extends Command {
                     return;
                 }
 
+                NotificationManager.post(NotificationType.INFO, mod.name, "Set " + args[1] + " to " + args[2], 5000);
+
                 bs.setState(args[2].equalsIgnoreCase("true"));
             }
 
@@ -58,7 +62,7 @@ public class SettingCommand extends Command {
 
                 double chatDouble = Double.parseDouble(args[2]);
                 ds.setVal(chatDouble);
-                ChatUtil.addChatMsg("Set " + EnumChatFormatting.YELLOW + mod.getName() + EnumChatFormatting.WHITE + "'s " + EnumChatFormatting.AQUA + args[1] + EnumChatFormatting.WHITE + " to " + EnumChatFormatting.GREEN + args[2]);
+                NotificationManager.post(NotificationType.INFO, mod.name, "Set " + args[1] + " to " + args[2], 5000);
                 return;
             }
 
@@ -69,7 +73,7 @@ public class SettingCommand extends Command {
                     ChatUtil.addChatMsg("Mode not found!");
                     return;
                 }
-                ChatUtil.addChatMsg("Set " + EnumChatFormatting.YELLOW + mod.getName() + EnumChatFormatting.WHITE + "'s " + EnumChatFormatting.AQUA + args[1] + EnumChatFormatting.WHITE + " to " + EnumChatFormatting.GREEN + args[2]);
+                NotificationManager.post(NotificationType.INFO, mod.name, "Set " + args[1] + " to " + args[2], 5000);
                 ms.setCurrentMode(args[2]);
             }
 
@@ -85,7 +89,7 @@ public class SettingCommand extends Command {
                 rgbs.setB(b);
                 rgbs.setA(a);
 
-                ChatUtil.addChatMsg("Set " + EnumChatFormatting.YELLOW + mod.getName() + EnumChatFormatting.WHITE + "'s " + EnumChatFormatting.AQUA + args[1] + EnumChatFormatting.WHITE + " to " + EnumChatFormatting.GREEN + args[2] + " " + args[3] + " " + args[4] + " " + args[5]);
+                NotificationManager.post(NotificationType.INFO, mod.name, "Set " + args[1] + ".", 5000);
             }
 
         }catch (NumberFormatException e){

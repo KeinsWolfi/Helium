@@ -5,8 +5,11 @@ import lombok.Setter;
 import me.helium9.HeliumMain;
 import me.helium9.module.impl.misc.GUISounds;
 import me.helium9.module.impl.misc.ModuleNotifications;
+import me.helium9.module.impl.visual.ClickGUI;
 import me.helium9.settings.Setting;
 import me.helium9.util.ChatUtil;
+import me.helium9.util.notifications.NotificationManager;
+import me.helium9.util.notifications.NotificationType;
 import me.zero.alpine.listener.Subscriber;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -65,8 +68,9 @@ public abstract class Module implements Subscriber {
     }
 
     public void onEnable(){
-        if(HeliumMain.INSTANCE.getMm().getModule(ModuleNotifications.class).isToggled())
-            ChatUtil.addChatMsg(CategoryChatFormatting(this) + this.name + " §aenabled§r.");
+        if(HeliumMain.INSTANCE.getMm().getModule(ModuleNotifications.class).isToggled()  && !(this == HeliumMain.INSTANCE.getMm().getModule(ClickGUI.class))) {
+            NotificationManager.post(NotificationType.ENABLE, this.name, "Enabled", 2000);
+        }
         if (HeliumMain.INSTANCE.getMm().getModule(GUISounds.class).isToggled())
             mc.thePlayer.playSound("random.click", 1F, 1F);
 
@@ -74,8 +78,8 @@ public abstract class Module implements Subscriber {
     }
 
     public void onDisable(){
-        if(HeliumMain.INSTANCE.getMm().getModule(ModuleNotifications.class).isToggled())
-            ChatUtil.addChatMsg(CategoryChatFormatting(this) + this.name + " §cdisabled§r.");
+        if(HeliumMain.INSTANCE.getMm().getModule(ModuleNotifications.class).isToggled() && !(this == HeliumMain.INSTANCE.getMm().getModule(ClickGUI.class)))
+            NotificationManager.post(NotificationType.DISABLE, this.name, "Disabled", 2000);
         if (HeliumMain.INSTANCE.getMm().getModule(GUISounds.class).isToggled())
             mc.thePlayer.playSound("random.click", 1F, 0.5F);
         HeliumMain.BUS.unsubscribe(this);

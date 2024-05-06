@@ -10,6 +10,7 @@ import java.util.Random;
 import me.helium9.HeliumMain;
 import me.helium9.event.Event;
 import me.helium9.event.impl.render.Event2D;
+import me.helium9.module.impl.misc.ModuleNotifications;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -161,6 +162,11 @@ public class GuiIngame extends Gui
         //edited
         final Event2D event = new Event2D(partialTicks, scaledresolution);
         HeliumMain.BUS.post(event);
+
+        ModuleNotifications notif = (ModuleNotifications) HeliumMain.INSTANCE.getMm().getModule(ModuleNotifications.class);
+        if(notif.isToggled()) {
+            notif.render();
+        }
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(icons);

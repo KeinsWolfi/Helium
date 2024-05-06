@@ -78,7 +78,7 @@ public class WaterMark extends Module {
 
         GlStateManager.scale(scale.getVal(), scale.getVal(),1);
         if(background.isState())
-            RoundedUtil.drawRoundedRect((float) (x.getVal()-2), (float) (y.getVal()-2), fr.getStringWidth(finalText)+3, fr.FONT_HEIGHT+2, 5, new Color(100, 100, 100 ,200).getRGB());
+            RoundedUtil.drawRoundedRect((float) (x.getVal()-2), (float) (y.getVal()-2), fr.getStringWidth(finalText)+3, fr.FONT_HEIGHT+2, 5, new Color(100, 100, 100 ,200));
         if(rainbow.isState()){
             fr.drawString(finalText, x.getVal(), y.getVal(), new Color(Color.HSBtoRGB(hue, 1, 0.8f)).getRGB());
         }else {

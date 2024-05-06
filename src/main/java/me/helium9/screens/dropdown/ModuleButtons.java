@@ -2,6 +2,7 @@ package me.helium9.screens.dropdown;
 
 import me.helium9.HeliumMain;
 import me.helium9.module.Module;
+import me.helium9.screens.dropdown.Settings.SettingsBase;
 import me.helium9.settings.Setting;
 import me.helium9.settings.impl.BooleanSetting;
 import me.helium9.settings.impl.DoubleSetting;
@@ -30,6 +31,8 @@ public class ModuleButtons implements Subscriber{
     public int offset;
 
     private String keyName;
+
+    private boolean extended = false;
 
     public ModuleButtons(Module mod, Frame parent, int offset){
         this.mod = mod;
@@ -65,22 +68,14 @@ public class ModuleButtons implements Subscriber{
             mod.toggle();
         }
         if(HoverUtil.isRectHovered(parent.x, parent.y + offset + parent.height, parent.width, parent.height, mouseX, mouseY) && mouseButton == 1){
-            for(Setting s : mod.getSList()) {
-                ChatUtil.addChatMsg( EnumChatFormatting.YELLOW + s.name);
-                if(s instanceof ModeSetting) {
-                    for(String modeName : HeliumMain.INSTANCE.getSm().getModeSetting(mod, s.getName()).getModes()){
-                        ChatUtil.addChatMsg("  " + EnumChatFormatting.GRAY + modeName);
-                    }
-                } else if (s instanceof DoubleSetting) {
-                    ChatUtil.addChatMsg(EnumChatFormatting.GRAY + "  Min: " + EnumChatFormatting.GRAY + ((DoubleSetting) s).getMinVal());
-                    ChatUtil.addChatMsg(EnumChatFormatting.GRAY + "  Max: " + EnumChatFormatting.GRAY + ((DoubleSetting) s).getMaxVal());
-                } else if (s instanceof RGBSetting) {
-                    ChatUtil.addChatMsg(EnumChatFormatting.GRAY + "  RGBA Setting.");
-                } else if (s instanceof BooleanSetting) {
-                    ChatUtil.addChatMsg(EnumChatFormatting.GRAY + "  Bool setting. (true/false)");
-                }
+            if(extended) {
+                extended = false;
+                DropDownGui.extendedModule = null;
             }
-            DropDownGui.extendedModule = this.mod;
+            else {
+                extended = true;
+                DropDownGui.extendedModule = this.mod;
+            }
         }
     }
 }

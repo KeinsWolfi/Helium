@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class RoundedUtil {
@@ -91,7 +93,7 @@ public class RoundedUtil {
         glLineWidth(1);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     }
-    public static void drawRoundedRect(float x, float y, float x1, float y1, float radius, int color) {
+    public static void drawRoundedRect(float x, float y, float x1, float y1, float radius, Color color) {
         glPushAttrib(0);
         glScaled(0.5D, 0.5D, 0.5D);
         x *= 2.0D;
@@ -101,7 +103,7 @@ public class RoundedUtil {
         glEnable(GL_BLEND);
         glDisable(GL_TEXTURE_2D);
         glEnable(GL_LINE_SMOOTH);
-        setColor(color);
+        setColor(color.getRGB());
         glEnable(GL_LINE_SMOOTH);
         glBegin(GL_POLYGON);
         int i;

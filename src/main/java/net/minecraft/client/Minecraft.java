@@ -194,7 +194,7 @@ import org.lwjgl.util.glu.GLU;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
 {
-    private static final Logger logger = LogManager.getLogger();
+    public static final Logger logger = LogManager.getLogger();
     private static final ResourceLocation locationMojangPng = new ResourceLocation("textures/gui/title/mojang.png");
     public static final boolean isRunningOnMac = Util.getOSType() == Util.EnumOS.OSX;
 
@@ -689,6 +689,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                 if (inputstream != null && inputstream1 != null)
                 {
                     Display.setIcon(new ByteBuffer[] {this.readImageToBuffer(inputstream), this.readImageToBuffer(inputstream1)});
+                    logger.info("Set window icon");
                 }
             }
             catch (IOException ioexception)
@@ -828,7 +829,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         }
     }
 
-    private ByteBuffer readImageToBuffer(InputStream imageStream) throws IOException
+    public ByteBuffer readImageToBuffer(InputStream imageStream) throws IOException
     {
         BufferedImage bufferedimage = ImageIO.read(imageStream);
         int[] aint = bufferedimage.getRGB(0, 0, bufferedimage.getWidth(), bufferedimage.getHeight(), (int[])null, 0, bufferedimage.getWidth());

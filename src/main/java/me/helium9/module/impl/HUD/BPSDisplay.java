@@ -36,7 +36,7 @@ public class BPSDisplay extends Module {
         float hue = ColorUtil.getHue(5);
         String bpsText = EnumChatFormatting.GRAY + "BPS: §r" + String.format("%.2f", getBPS());
         if(rainbow.isState()) {
-            RoundedUtil.drawRoundedRect(2, sr.getScaledHeight()-(6 + fr.FONT_HEIGHT), fr.getStringWidth(bpsText) + 2, fr.FONT_HEIGHT + 2, 2, new Color(16, 16, 16, 200).getRGB());
+            RoundedUtil.drawRoundedRect(2, sr.getScaledHeight()-(6 + fr.FONT_HEIGHT), fr.getStringWidth(bpsText) + 2, fr.FONT_HEIGHT + 2, 2, new Color(16, 16, 16, 200));
             fr.drawString(bpsText, 4, sr.getScaledHeight()-(4 + fr.FONT_HEIGHT), new Color(Color.HSBtoRGB(hue, 0.5f, 0.6f)).getRGB());
         }
         else {

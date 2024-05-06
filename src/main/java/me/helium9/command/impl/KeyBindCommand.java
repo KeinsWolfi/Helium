@@ -21,6 +21,10 @@ public class KeyBindCommand extends Command {
     @Override
     public void execute(String... args) throws CommandException {
         ChatUtil.addChatMsg("Here are all Modules.");
-            HeliumMain.INSTANCE.getMm().getModules().values().stream().forEach(module -> ChatUtil.addChatMsg("  " + EnumChatFormatting.YELLOW + module.getName() + EnumChatFormatting.WHITE + ": " + EnumChatFormatting.GRAY + Keyboard.getKeyName(module.getKey())));
+        for(Module mod : HeliumMain.INSTANCE.getMm().getModules().values()){
+            if(mod.getKey() != Keyboard.KEY_NONE) {
+                ChatUtil.addChatMsg(EnumChatFormatting.YELLOW + "  " + mod.getName() + EnumChatFormatting.GRAY + " - " + Keyboard.getKeyName(mod.getKey()));
+            }
+        }
     }
 }
