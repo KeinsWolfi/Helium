@@ -2,10 +2,7 @@ package net.minecraft.client.entity;
 
 import me.helium9.HeliumMain;
 import me.helium9.command.CommandManager;
-import me.helium9.event.impl.update.EventMotion;
-import me.helium9.event.impl.update.EventMove;
-import me.helium9.event.impl.update.EventSlowDown;
-import me.helium9.event.impl.update.EventUpdate;
+import me.helium9.event.impl.update.*;
 import me.helium9.module.impl.motion.NoSlow;
 import me.zero.alpine.event.EventPhase;
 import net.minecraft.client.Minecraft;
@@ -50,13 +47,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatFileWriter;
 import net.minecraft.tileentity.TileEntitySign;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.MovementInput;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.*;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 

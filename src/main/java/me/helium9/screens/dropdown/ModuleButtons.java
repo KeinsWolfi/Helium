@@ -1,14 +1,6 @@
 package me.helium9.screens.dropdown;
 
-import me.helium9.HeliumMain;
 import me.helium9.module.Module;
-import me.helium9.screens.dropdown.Settings.SettingsBase;
-import me.helium9.settings.Setting;
-import me.helium9.settings.impl.BooleanSetting;
-import me.helium9.settings.impl.DoubleSetting;
-import me.helium9.settings.impl.ModeSetting;
-import me.helium9.settings.impl.RGBSetting;
-import me.helium9.util.ChatUtil;
 import me.helium9.util.render.Animation.Animation;
 import me.helium9.util.render.Animation.Animations.EaseInOutSine;
 import me.helium9.util.render.Animation.Direction;
@@ -17,7 +9,6 @@ import me.helium9.util.render.hover.HoverUtil;
 import me.zero.alpine.listener.Subscriber;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;

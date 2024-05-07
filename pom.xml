@@ -92,11 +92,6 @@
             <url>https://repo1.maven.org/maven2</url>
         </repository>
 
-        <repository>
-            <id>litarvan</id>
-            <url>https://litarvan.github.io/maven</url>
-        </repository>
-
     </repositories>
 
     <dependencies>

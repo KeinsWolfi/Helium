@@ -25,7 +25,7 @@ public final class Sprint extends Module {
 
     public Sprint(){
         addSettings(mode);
-        setKey(Keyboard.KEY_V);
+        setKey(Keyboard.KEY_R);
     }
 
     @Override

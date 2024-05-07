@@ -1,18 +1,18 @@
 package me.helium9.module.impl.combat;
 
 import me.helium9.HeliumMain;
+import me.helium9.event.impl.packet.EventPacket;
 import me.helium9.event.impl.render.Event3D;
 import me.helium9.event.impl.update.EventAttack;
 import me.helium9.event.impl.update.EventMotion;
-import me.helium9.event.impl.update.EventUpdate;
 import me.helium9.module.Category;
 import me.helium9.module.Module;
 import me.helium9.module.ModuleInfo;
 import me.helium9.settings.impl.BooleanSetting;
 import me.helium9.settings.impl.DoubleSetting;
 import me.helium9.settings.impl.ModeSetting;
+import me.helium9.util.PacketUtil;
 import me.helium9.util.Timer;
-import me.helium9.util.render.world.BoxESPUtil;
 import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
 import net.minecraft.entity.Entity;
@@ -104,7 +104,7 @@ public class KillAura extends Module {
             if(target.isDead || ((EntityLivingBase) target).deathTime > 0) return;
             switch (mode.getCurrentMode()){
                 case "Single":
-                    mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, getRot(target)[0], getRot(target)[1], mc.thePlayer.onGround));
+                    PacketUtil.sendPacket(new C03PacketPlayer.C05PacketPlayerLook(getRot(target)[0], getRot(target)[1], mc.thePlayer.onGround));
                     if(timer.hasTimeElapsed(100, true)) {
                         mc.thePlayer.swingItem();
 

@@ -42,7 +42,7 @@ public class GuiAddMicrosoft extends GuiScreen {
 
                 try {
                     result = auth.loginWithCredentials(this.username.getText(), this.password.getText());
-                    this.status = "\u00a7aLogging in...";
+                    this.status = "\u00a7aLogged in!";
                     mc.setSession(new Session(result.getProfile().getName(), result.getProfile().getId(), result.getAccessToken(), "legacy"));
                 } catch (MicrosoftAuthenticationException e) {
                     e.printStackTrace();

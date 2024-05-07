@@ -1581,7 +1581,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
 
         if (!this.playerController.func_181040_m())
         {
-            this.rightClickDelayTimer = 4;
+            this.rightClickDelayTimer = HeliumMain.INSTANCE.getMm().getModule(FastPlace.class).isToggled() ? 1 : 4;
             boolean flag = true;
             ItemStack itemstack = this.thePlayer.inventory.getCurrentItem();
 
@@ -2170,7 +2170,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                 }
             }
 
-            if (this.gameSettings.keyBindUseItem.isKeyDown() && (HeliumMain.INSTANCE.getMm().getModule(FastPlace.class).isToggled() || this.rightClickDelayTimer == 0) && !this.thePlayer.isUsingItem())
+            if (this.gameSettings.keyBindUseItem.isKeyDown() && this.rightClickDelayTimer == 0 && !this.thePlayer.isUsingItem())
             {
                 this.rightClickMouse();
             }

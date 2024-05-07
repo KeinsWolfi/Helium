@@ -49,7 +49,7 @@ public class ModuleNotifications extends Module {
             x = sr.getScaledWidth() - (notificationWidth + 5) * (float) animation.getOutput().floatValue();
             y = sr.getScaledHeight() - (notificationHeight + 5) * (float) animation.getOutput().floatValue() - yOffset;
 
-            notification.draw(x, y, notificationWidth, notificationHeight, Color.DARK_GRAY);
+            notification.draw(x, y, notificationWidth, notificationHeight, new Color(64, 64, 64, 210));
 
             yOffset += notificationHeight + 5;
 

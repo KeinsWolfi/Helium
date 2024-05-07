@@ -28,7 +28,7 @@ import java.util.List;
 )
 public class ChestStealer extends Module {
     private int randomDelay = (int) (Math.random() * 50);
-    private final DoubleSetting delay = new DoubleSetting("Delay", 150, 10, 1000, 10);
+    private final DoubleSetting delay = new DoubleSetting("Delay", 150, 10, 1000, 5);
     private List<Integer> items;
     private long lastTime = System.currentTimeMillis();
 
@@ -49,7 +49,7 @@ public class ChestStealer extends Module {
     @Subscribe
     public final Listener<Event2D> on2D = new Listener<>(e -> {
         if(!(mc.currentScreen instanceof GuiChest)) return;
-        final ContainerChest chest = (ContainerChest) mc.thePlayer.openContainer;
+        ContainerChest chest = (ContainerChest) mc.thePlayer.openContainer;
 
         for(int i = 0; i < chest.inventorySlots.size(); i++){
             final ItemStack stack = chest.getLowerChestInventory().getStackInSlot(i);
