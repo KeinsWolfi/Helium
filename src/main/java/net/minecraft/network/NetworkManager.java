@@ -164,7 +164,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
 
                 if(event.isCancelled()) return;
 
-                packet.processPacket(this.packetListener);
+                event.getPacket().processPacket(this.packetListener);
             }
             catch (ThreadQuickExitException var4)
             {

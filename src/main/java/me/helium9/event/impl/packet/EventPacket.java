@@ -11,6 +11,6 @@ import net.minecraft.network.Packet;
 @AllArgsConstructor
 public final class EventPacket extends Event {
 
-    private Packet<?> packet;
+    private Packet packet;
 
 }
