@@ -14,6 +14,8 @@ import java.util.concurrent.Callable;
 import me.helium9.HeliumMain;
 import me.helium9.event.impl.render.Event3D;
 import me.helium9.event.impl.render.EventCamera;
+import me.helium9.module.Module;
+import me.helium9.module.impl.combat.Reach;
 import me.zero.alpine.event.EventPhase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
@@ -466,6 +468,9 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         if (entity != null && this.mc.theWorld != null)
         {
+            Module reachMod = HeliumMain.INSTANCE.getMm().getModule(Reach.class);
+            double reach = reachMod.isToggled() ? ((Reach) reachMod).reach.getVal() : 3.0D;
+
             this.mc.mcProfiler.startSection("pick");
             this.mc.pointedEntity = null;
             double d0 = (double)this.mc.playerController.getBlockReachDistance();
@@ -473,14 +478,13 @@ public class EntityRenderer implements IResourceManagerReloadListener
             double d1 = d0;
             Vec3 vec3 = entity.getPositionEyes(partialTicks);
             boolean flag = false;
-            int i = 3;
 
             if (this.mc.playerController.extendedReach())
             {
                 d0 = 6.0D;
                 d1 = 6.0D;
             }
-            else if (d0 > 3.0D)
+            else if (d0 > reach)
             {
                 flag = true;
             }
