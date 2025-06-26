@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import java.util.List;
 import java.util.Set;
 
+import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IntHashMap;
@@ -14,9 +15,14 @@ public class KeyBinding implements Comparable<KeyBinding>
     private static final List<KeyBinding> keybindArray = Lists.<KeyBinding>newArrayList();
     private static final IntHashMap<KeyBinding> hash = new IntHashMap();
     private static final Set<String> keybindSet = Sets.<String>newHashSet();
+    @Getter
     private final String keyDescription;
+    @Getter
     private final int keyCodeDefault;
+    @Getter
     private final String keyCategory;
+    @Setter
+    @Getter
     private int keyCode;
 
     /** Is the key held down? */
@@ -92,11 +98,6 @@ public class KeyBinding implements Comparable<KeyBinding>
         return this.pressed;
     }
 
-    public String getKeyCategory()
-    {
-        return this.keyCategory;
-    }
-
     /**
      * Returns true on the initial key press. For continuous querying use {@link isKeyDown()}. Should be used in key
      * events.
@@ -118,26 +119,6 @@ public class KeyBinding implements Comparable<KeyBinding>
     {
         this.pressTime = 0;
         this.pressed = false;
-    }
-
-    public String getKeyDescription()
-    {
-        return this.keyDescription;
-    }
-
-    public int getKeyCodeDefault()
-    {
-        return this.keyCodeDefault;
-    }
-
-    public int getKeyCode()
-    {
-        return this.keyCode;
-    }
-
-    public void setKeyCode(int keyCode)
-    {
-        this.keyCode = keyCode;
     }
 
     public int compareTo(KeyBinding p_compareTo_1_)

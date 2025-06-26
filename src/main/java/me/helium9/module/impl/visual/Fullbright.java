@@ -10,6 +10,7 @@ import me.zero.alpine.listener.Listener;
 import me.zero.alpine.listener.Subscribe;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.input.Keyboard;
 
@@ -50,7 +51,11 @@ public final class Fullbright extends Module {
         switch (mode.getCurrentMode()){
             case "Gamma":
                 mc.thePlayer.removePotionEffect(Potion.nightVision.id);
-                mc.gameSettings.gammaSetting = (float) gamma.getVal();
+                int biomeID = mc.theWorld.getBiomeGenForCoords(new BlockPos(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ)).biomeID;
+                boolean inDesert = biomeID == 2 || biomeID == 17;
+
+                mc.gameSettings.gammaSetting = inDesert ? oldGamma : (float) gamma.getVal();
+
                 break;
             case "NightVision":
                 mc.gameSettings.gammaSetting = oldGamma;

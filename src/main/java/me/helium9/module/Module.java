@@ -7,7 +7,6 @@ import me.helium9.module.impl.misc.GUISounds;
 import me.helium9.module.impl.misc.ModuleNotifications;
 import me.helium9.module.impl.visual.ClickGUI;
 import me.helium9.settings.Setting;
-import me.helium9.util.ChatUtil;
 import me.helium9.util.notifications.NotificationManager;
 import me.helium9.util.notifications.NotificationType;
 import me.zero.alpine.listener.Subscriber;
