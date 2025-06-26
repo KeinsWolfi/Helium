@@ -63,10 +63,12 @@ public class Frame {
         fr.drawString(cat.name(), x+5, y+ 4, -1);
 
         if(extended){
+            int offset = 0;
             fr.drawString("-", x + 75, y+4, -1);
 
             for(ModuleButtons mb : moduleButtons){
-                mb.drawScreen(mouseX, mouseY, partialTicks);
+                mb.drawScreen(mouseX, mouseY, partialTicks, offset);
+                offset+=mb.height+1;
             }
         }else{
             fr.drawString("+", x + 75, y+4, -1);

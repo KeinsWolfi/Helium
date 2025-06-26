@@ -36,6 +36,7 @@ import javax.crypto.SecretKey;
 import me.helium9.HeliumMain;
 import me.helium9.event.EventFlow;
 import me.helium9.event.impl.packet.EventPacket;
+import me.helium9.event.impl.packet.EventSendPacket;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.CryptManager;
@@ -188,8 +189,16 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
     {
         if (this.isChannelOpen())
         {
+
+            final EventSendPacket event = new EventSendPacket(packetIn);
+            event.setEventFlow(EventFlow.OUTBOUND);
+
+            HeliumMain.BUS.post(event);
+
+            if(event.isCancelled()) return;
+
             this.flushOutboundQueue();
-            this.dispatchPacket(packetIn, (GenericFutureListener <? extends Future <? super Void >> [])null);
+            this.dispatchPacket(event.getPacket(), (GenericFutureListener <? extends Future <? super Void >> [])null);
         }
         else
         {

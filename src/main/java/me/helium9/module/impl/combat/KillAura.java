@@ -2,6 +2,7 @@ package me.helium9.module.impl.combat;
 
 import me.helium9.HeliumMain;
 import me.helium9.event.impl.packet.EventPacket;
+import me.helium9.event.impl.packet.EventSendPacket;
 import me.helium9.event.impl.render.Event3D;
 import me.helium9.event.impl.update.EventAttack;
 import me.helium9.event.impl.update.EventMotion;
@@ -86,6 +87,9 @@ public class KillAura extends Module {
 
     @Subscribe
     private final Listener<EventMotion> onMotion = new Listener<>(e ->{
+
+        newYaw = mc.thePlayer.rotationYaw;
+        newPitch = mc.thePlayer.rotationPitch;
 
         if (e.isPost()) return;
 
@@ -196,16 +200,16 @@ public class KillAura extends Module {
     });
 
     @Subscribe
-    private final Listener<EventPacket> onPacket = new Listener<>(packet -> {
-        if(packet.getPacket() instanceof C03PacketPlayer){
-            if(packet.getPacket() instanceof C03PacketPlayer.C06PacketPlayerPosLook) {
-                C03PacketPlayer.C06PacketPlayerPosLook packetPlayerPosLook = (C03PacketPlayer.C06PacketPlayerPosLook) packet.getPacket();
-                Vec3 pos = new Vec3(packetPlayerPosLook.getPositionX(), packetPlayerPosLook.getPositionY(), packetPlayerPosLook.getPositionZ());
-                packet.setPacket(new C03PacketPlayer.C06PacketPlayerPosLook(pos.xCoord, pos.yCoord, pos.zCoord, newYaw, newPitch, packetPlayerPosLook.isOnGround()));
+    private final Listener<EventSendPacket> onPacketSend = new Listener<>(p -> {
+        if(p.getPacket() instanceof C03PacketPlayer){
+            C03PacketPlayer packet = (C03PacketPlayer) p.getPacket();
+            if(packet instanceof C03PacketPlayer.C06PacketPlayerPosLook) {
+                packet.setPitch(newPitch);
+                packet.setYaw(newYaw);
             }
-            if(packet.getPacket() instanceof C03PacketPlayer.C05PacketPlayerLook) {
-                C03PacketPlayer.C05PacketPlayerLook packetPlayerLook = (C03PacketPlayer.C05PacketPlayerLook) packet.getPacket();
-                packet.setPacket(new C03PacketPlayer.C05PacketPlayerLook(newYaw, newPitch, packetPlayerLook.isOnGround()));
+            if(packet instanceof C03PacketPlayer.C05PacketPlayerLook) {
+                packet.setPitch(newPitch);
+                packet.setYaw(newYaw);
             }
         }
     });
