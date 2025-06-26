@@ -12,7 +12,7 @@ public final class ModuleManager {
     private final HashMap<Class<? extends Module>, Module> modules;
 
     public ModuleManager(){
-        this.modules=new HashMap<>();
+        this.modules = new HashMap<>();
         register();
     }
 
@@ -21,7 +21,7 @@ public final class ModuleManager {
     }
 
     public Module getModule(String name){
-        for(Module mod: modules.values()){
+        for (Module mod : modules.values()) {
             if(mod.getName().equalsIgnoreCase(name)){
                 return mod;
             }
@@ -42,7 +42,7 @@ public final class ModuleManager {
         return getModules().values().stream().filter(module -> module.getCategory()==cat).toArray(Module[]::new);
     }
 
-    public final void register(){
+    public void register(){
         final Reflections refl = new Reflections("me.helium9.module.impl");
 
         final Set<Class<? extends Module>> classes = refl.getSubTypesOf(Module.class);
@@ -51,7 +51,7 @@ public final class ModuleManager {
             try {
                 final Module feat = aClass.newInstance();
                 modules.put(aClass, feat);
-            }catch (InstantiationException | IllegalAccessException ignored){
+            } catch (InstantiationException | IllegalAccessException ignored){
 
             }
         }

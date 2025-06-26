@@ -9,7 +9,6 @@ import me.helium9.event.impl.input.EventKey;
 import me.helium9.module.ModuleManager;
 import me.helium9.module.impl.misc.ModuleNotifications;
 import me.helium9.screens.altmgr.AltManager;
-import me.helium9.screens.altmgr.GuiAddMicrosoft;
 import me.helium9.screens.dropdown.DropDownGui;
 import me.helium9.settings.SettingManager;
 import me.helium9.util.render.shader.BlurUtil;
@@ -25,7 +24,6 @@ import org.lwjgl.opengl.Display;
 
 import java.io.InputStream;
 import java.nio.ByteBuffer;
-import java.util.Map;
 
 @Getter
 public enum HeliumMain implements Subscriber {
@@ -93,6 +91,7 @@ public enum HeliumMain implements Subscriber {
             result = auth.loginWithCredentials(mail, pass);
             mc.setSession(new Session(result.getProfile().getName(), result.getProfile().getId(), result.getAccessToken(), "legacy"));
         } catch (MicrosoftAuthenticationException e) {
+            e.printStackTrace();
         }
 
     }
