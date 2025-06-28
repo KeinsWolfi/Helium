@@ -45,7 +45,7 @@ public class SettingManager {
 
     public Setting getSetting(Module mod, String settingName){
         for(Setting setting : mod.getSList()){
-            if(setting.getName().equals(settingName)) return setting;
+            if(setting.getName().equalsIgnoreCase(settingName)) return setting;
         }
         return null;
     }
